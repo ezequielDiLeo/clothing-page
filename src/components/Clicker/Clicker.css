@@ -1,0 +1,36 @@
+.contenedorButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+.contenedorButton .btn1 {
+  background-color: #35065c;
+  text-align: center;
+  color: aliceblue;
+  margin: 5px;
+  padding: 2px;
+  border-radius: 15%;
+}
+.contenedorButton .btn2 {
+  background-color: #35065c;
+  text-align: center;
+  color: aliceblue;
+  margin: 5px;
+  padding: 2px;
+  border-radius: 15%;
+}
+.contenedorButton .btn3 {
+  background-color: #35065c;
+  text-align: center;
+  color: aliceblue;
+  margin: 5px;
+  padding: 2px;
+  border-radius: 15%;
+}
+
+.ContenedorCounter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=Clicker.css.map */
