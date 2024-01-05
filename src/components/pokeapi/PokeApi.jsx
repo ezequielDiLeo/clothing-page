@@ -1,43 +1,45 @@
-/* import {useState} from 'react'
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import './PokeApi.scss'
+import { Button } from '../Button/Button'
+import { useFetch } from '../../hooks/useFetch'
 
-export const PokeApi = ( {txt} )=> {
-    const [pokemon, setPokemon] = useState(null);
+
+export const PokeApi = () => {
     const [id, setId] = useState(1)
-
-        const id = 1
-    
-    useEffect(() => {
-
-        fetch('https://pokeapi.co/api/v2/pokemon/${id}')
-        .then((response) => response.json())
-        .then((data) => {
-            setPokemon(data)
-        })
-    }, [id]);
-
+    const {data: pokemon} = useFetch(`https://pokeapi.co/api/v2/pokemon/${id}`, [id])
 
     const handleAnterior = () => {
-        id > 1 && setId(id-1)
-    }
-  
-
-    const handleSiguiente = () =>{
-        setId(id + 1)
+       id > 1 && setId (id - 1)
     }
 
+    const handleSiguiente = () => {
+       id < 50 && setId (id + 1)
+    }
 
-    return (
-        <div>
-            <h2>{txt}</h2>
+  return (
+    <>
+        <div className='contenedor-api'>
+            <h2 className='title-contenedor-api'>Pokeapi</h2>
             <hr />
-
             {
-                pokemon &&
+                pokemon && 
                 <>
-                    <h2></h2>
+                    <div className='contenedor-poke'>
+                        <h2>{pokemon.name}</h2>
+                        <img className='imagen' src={pokemon.sprites.front_default} alt={pokemon.name} />
+                        <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla quisquam enim sunt veritatis consectetur sint ut libero quas cumque sapiente similique saepe repellendus illum, maxime eligendi odio natus ab. Aperiam?</h4>
+                    </div>
+                    
                 </>
             }
+
+            <div className='flex gap-5'>
+                <Button onClick={handleAnterior}>Anterior</Button>
+                <Button onClick={handleSiguiente}>Siguiente</Button>
+            </div>
+
         </div>
+        
+    </>
   )
-} */
+}

@@ -1,4 +1,4 @@
-/*import React from 'react'
+import React from 'react'
 
 export const Componentes = ({children}) => {
   return (
@@ -7,4 +7,4 @@ export const Componentes = ({children}) => {
         {children}
     </div>
   )
-}*/
+}
