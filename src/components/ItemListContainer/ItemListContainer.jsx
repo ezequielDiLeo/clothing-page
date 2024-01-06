@@ -9,15 +9,16 @@ import { useProductos } from '../../hooks/useProductos'
 export const ItemListContainer = () => {
   const { productos, loading } = useProductos()
 
+
   return (
     <>
       { loading
-          ? <h2 className='text-center justify-center bg-grey-300 text-4xl mt-8'> Loading <span className='text-xs'>🤯🤯</span></h2>
+          ? <h2 className='text-center bg-grey-300 text-4xl mt-8'> Loading <span className='text-xs'>🤯🤯</span></h2>
           : <ItemList productos={productos}/>
       }
     </>
   )
-}
+} 
 
 
  

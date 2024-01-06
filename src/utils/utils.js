@@ -4,6 +4,6 @@ export const Datos = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
           resolve(MOCK_DATA)
-      }, 3000)
+      }, 2000)
     })
   }
