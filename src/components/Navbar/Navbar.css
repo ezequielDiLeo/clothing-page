@@ -3,7 +3,7 @@ body {
 }
 
 .header {
-  background-color: #042646;
+  background-color: #ffffff;
   width: 100%;
   height: 80px;
   display: flex;
@@ -16,13 +16,9 @@ body {
   justify-content: space-around;
   margin: 0 auto;
 }
-.header .header_container .header_title {
-  color: aliceblue;
-  font-size: 20px;
-}
-.header .header_container .header_title a {
-  text-decoration: none;
-  color: white;
+.header .header_container .logo {
+  width: 85px;
+  height: 75px;
 }
 .header .header_container .navbar {
   display: flex;
@@ -32,8 +28,14 @@ body {
 }
 .header .header_container .navbar .navbar_link {
   text-decoration: none;
-  color: white;
+  color: rgb(170, 167, 10);
 }
 .header .header_container .navbar :hover {
-  color: #4270d4;
+  color: #756f12;
+}
+.header .cart {
+  width: 25%;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
 }/*# sourceMappingURL=Navbar.css.map */

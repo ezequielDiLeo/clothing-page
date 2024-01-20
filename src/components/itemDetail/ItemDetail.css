@@ -1,0 +1,25 @@
+.detail_container {
+  width: 100%;
+  height: 100vh;
+  background-color: #757272;
+}
+.detail_container .title {
+  font-size: 30px;
+  color: #6e5d11;
+}
+.detail_container .img {
+  width: 350px;
+  height: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5%;
+}
+.detail_container .descripcion {
+  text-align: justify;
+  padding: 10px 20px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+}
+.detail_container .price {
+  color: white;
+}/*# sourceMappingURL=ItemDetail.css.map */

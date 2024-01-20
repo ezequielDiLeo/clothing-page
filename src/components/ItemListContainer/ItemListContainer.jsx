@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import './ItemListContainer.scss'
 import { ItemList } from '../itemList/ItemList'
 import { useProductos } from '../../hooks/useProductos'
-// import withProductsData from '../../ejemplo/hoc/withProductsData'
+// import { Spinner } from '../Loader/spinner'
+import { Loader } from '../Loader/Loader.jsx'
+
 
 
 
@@ -13,7 +15,7 @@ export const ItemListContainer = () => {
   return (
     <>
       { loading
-          ? <h2 className='text-center bg-grey-300 text-4xl mt-8'> Loading <span className='text-xs'>🤯🤯</span></h2>
+          ? <Loader></Loader>
           : <ItemList productos={productos}/>
       }
     </>

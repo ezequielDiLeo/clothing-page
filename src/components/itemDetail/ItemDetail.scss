@@ -1,0 +1,25 @@
+.detail_container{
+    width: 100%;
+    height: 100vh;
+    background-color: #757272;
+
+    .title{
+        font-size: 30px;
+        color: #6e5d11;
+    }
+    .img{
+        width: 350px;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 5%;
+    }
+    .descripcion{
+        text-align: justify;
+        padding: 10px 20px;
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+    }
+    .price{
+        color: white;
+    }
+}

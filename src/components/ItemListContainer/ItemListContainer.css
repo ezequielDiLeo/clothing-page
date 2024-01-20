@@ -1,12 +1,19 @@
 .list_contaier {
   margin: 0;
-  background-color: #2b2626;
+  background-color: #5f5c4c;
   color: white;
   width: 100%;
-  height: auto;
-  padding: 50px;
+  max-height: auto;
 }
-.list_contaier .list_title {
+.list_contaier .div-container {
+  display: flex;
+}
+.list_contaier .div-container .article {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.list_contaier .div-container .list_title {
   font-size: 15px;
   color: rgb(255, 255, 255);
   margin: 0;

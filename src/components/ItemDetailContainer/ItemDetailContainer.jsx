@@ -7,7 +7,7 @@ export const ItemDetailContainer = () => {
     const [loading, setLoading] = useState(true)
     const [item, setItem] = useState(null)
 
-        const { itemId } = useParams()
+        const { itemId } = useParams()  
 
     useEffect(() => {
         setLoading(true)

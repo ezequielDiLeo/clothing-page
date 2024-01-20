@@ -3,7 +3,7 @@ import React from 'react'
 export const Button = ({ children, className="", onClick }) => {
   return (
     <button 
-    onClick={onClick} className={'bg-sky-950 text-center -justify-center p-2 m-2 rounded-lg'}>
+    onClick={onClick} className={`bg-blue-950 text-center -justify-center p-2 m-2 rounded-lg text-white-600 ${className}`}>
       {children}
     </button>
   );
