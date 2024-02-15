@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './PokeApi.scss'
-import { Button } from '../Button/Button'
+import { Button } from '../../components/Button/Button'
 import { useFetch } from '../../hooks/useFetch'
 
 
@@ -22,7 +22,7 @@ export const PokeApi = () => {
             <h2 className='title-contenedor-api'>Pokeapi</h2>
             <hr />
             {
-                pokemon && 
+                pokemon && //cuando tenga los pokemon (&& entonces)
                 <>
                     <div className='contenedor-poke'>
                         <h2>{pokemon.name}</h2>

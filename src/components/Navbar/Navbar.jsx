@@ -3,28 +3,32 @@ import './Navbar.scss'
 import logo from '../../assets/img/logoTienda.png'
 import { Cartwidget } from '../Cartwidget/Cartwidget'
 import { Link, NavLink } from 'react-router-dom'
-// import NavLink from './NavLink'
 
+/*......LINKS.....*/ 
 const links = [
   {
     label: "Home",
     href: "/",
   },
   {
+    label: "Remeras",
+    href:"/items/remeras",
+  },
+  {
     label: "pantalones",
-    href: "/productos/pantalones",
+    href: "/items/pantalones",
   },
   {
     label: "camisas",
-    href: "/productos/camisas",
+    href: "/items/camisas",
   },
   {
     label: "lentes",
-    href: "/productos/lentes",
+    href: "/items/lentes",
   },
   {
     label: "zapatillas",
-    href: "/productos/zapatillas",
+    href: "/items/zapatillas",
   },
 ]
 
@@ -33,7 +37,7 @@ export const Navbar = () => {
   return (
     <header className='header'>
         <div className='header_container'>
-            <img className="logo" src={logo} alt="logo" />
+            <Link to="/"><img className="logo" src={logo} alt="logo" /></Link> 
 
             <nav className='navbar'>
                 {
@@ -44,7 +48,7 @@ export const Navbar = () => {
                      className={({ isActive }) =>
                       isActive
                         ? "text-blue-900 text-lg  font-bold"
-                        : "text-black text-lg  font-semibold"
+                        : "text-black"
                      }> 
                      {link.label}
                      </NavLink>

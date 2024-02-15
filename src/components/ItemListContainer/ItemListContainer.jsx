@@ -11,7 +11,6 @@ import { Loader } from '../Loader/Loader.jsx'
 export const ItemListContainer = () => {
   const { productos, loading } = useProductos()
 
-
   return (
     <>
       { loading

@@ -1,0 +1,17 @@
+.carrito {
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(rgba(64, 64, 66, 0.753), rgba(32, 32, 33, 0.966)), url(https://i.pinimg.com/550x/92/86/06/928606fec30812d4e985af876f18c389.jpg) no-repeat center center fixed;
+  background-size: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.carrito .btn-car {
+  align-items: center;
+  width: auto;
+  height: auto;
+  font-size: 12px;
+  background-color: rgb(18, 72, 88);
+  margin-bottom: 50px;
+}/*# sourceMappingURL=CartView.css.map */

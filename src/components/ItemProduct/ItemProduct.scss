@@ -1,0 +1,46 @@
+.container-pr{
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(rgba(27, 27, 27, 0.897), rgba(14, 13, 13, 0.685)), url('../../assets/img/fondoDetail.jpg') fixed;
+    background-position: center;
+    object-fit: cover;
+    color: white;
+    
+    .title-prod{
+        font-size: 25px;
+        color: rgb(255, 255, 255);
+    }
+    
+    .contenedor-pr{
+        padding: 50px;
+
+        .cont-img{
+            display: flex;
+            width: 350px;
+            height: 350px;
+            overflow: hidden;
+            margin: 20px;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+    
+            img{
+                width: 100%;
+                min-height: 100%;
+                object-fit: cover;
+                transition:  all ease-out 1s;
+            }
+        
+            img:hover{
+                transform: scale(1.1);
+            }
+    }
+
+    
+    }
+
+    
+}

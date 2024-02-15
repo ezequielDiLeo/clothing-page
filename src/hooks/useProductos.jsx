@@ -15,9 +15,9 @@ export const useProductos = () => {
 
         Datos()
             .then((data) => {
-                const id = categoryId 
+                {const id = categoryId 
                             ? data.filter(products => products.category === categoryId)
-                            : data
+                            : data}
 
                 setProductos( id )
             }) 

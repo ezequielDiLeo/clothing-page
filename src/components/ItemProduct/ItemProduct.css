@@ -1,0 +1,39 @@
+.container-pr {
+  width: 100%;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(rgba(27, 27, 27, 0.897), rgba(14, 13, 13, 0.685)), url("../../assets/img/fondoDetail.jpg") fixed;
+  background-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  color: white;
+}
+.container-pr .title-prod {
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+}
+.container-pr .contenedor-pr {
+  padding: 50px;
+}
+.container-pr .contenedor-pr .cont-img {
+  display: flex;
+  width: 350px;
+  height: 350px;
+  overflow: hidden;
+  margin: 20px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.container-pr .contenedor-pr .cont-img img {
+  width: 100%;
+  min-height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: all ease-out 1s;
+}
+.container-pr .contenedor-pr .cont-img img:hover {
+  transform: scale(1.1);
+}/*# sourceMappingURL=ItemProduct.css.map */

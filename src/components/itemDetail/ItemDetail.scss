@@ -1,25 +1,82 @@
 .detail_container{
     width: 100%;
-    height: 100vh;
-    background-color: #757272;
+    min-height: 100vh;
+    background: linear-gradient(rgba(20, 20, 20, 0.959), rgba(0, 0, 0, 0.616)), url("../../assets/img/logoTienda.png") fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .desc{
+        display: flex;
+        width: 85%;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        .img{
+            width: 350px;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 2%;
+        }
+            
+        .descripcion{
+            display: flex;
+            justify-content: end;
+            text-align: justify;
+            padding: 15px;
+            color: rgb(235, 227, 227);
+            font-weight: 300;
+            background-color: #1b1a1a48;
+        }
+    }
+
+    .btn-volver{
+        margin-top: 20px;
+        width: 50px;
+        height: 30px;
+        font-size: 10px;
+        background-color: #524d25;
+    }
 
     .title{
         font-size: 30px;
-        color: #6e5d11;
     }
-    .img{
-        width: 350px;
-        height: 350px;
-        object-fit: cover;
-        border-radius: 5%;
-    }
-    .descripcion{
-        text-align: justify;
-        padding: 10px 20px;
-        color: rgb(255, 255, 255);
-        font-weight: 500;
-    }
+    
     .price{
-        color: white;
+        color: rgb(255, 255, 255);
+        padding: 0 0 20px 155px;
     }
+
+    .btn-fn{
+        align-items: center;
+        margin-left: 150px;
+        width: auto;
+        height: 40px;
+        font-size: 12px;
+        background-color: rgb(18, 72, 88);
+        margin-bottom: 100px;
+    }
+
+    .btn-agregar{
+        margin-left: 140px;
+        width: 90px;
+        height: 30px;
+        font-size: 10px;
+        background-color: rgb(71, 67, 23);
+        margin-bottom: 50px;
+    }
+
+    .contenedor-cant {
+        margin-left: 125px;
+        
+        .btn-cant{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 25px;
+            height: 20px;
+            font-size: 10px;
+            background-color: rgb(71, 67, 23);
+        }
+    }
+    
 }

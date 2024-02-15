@@ -1,6 +1,96 @@
-.imagen {
+.container-publi {
+  width: 100%;
+  min-height: 100vh;
+  justify-content: center;
+  background-color: #3f3d34;
+  color: white;
+}
+.container-publi .publicidad {
+  width: 100%;
+  height: 100%;
+  padding: 0 50px 30px 30px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+}
+.container-publi .publicidad .title-publicidad {
+  padding-top: 10px;
+  width: 100%;
+  margin: 10px;
+}
+.container-publi .publicidad .title-publicidad .span {
+  color: rgb(10, 20, 73);
+}
+.container-publi .publicidad .cont-publicidad {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+  background-image: url("../../assets/img/gifPublicidad.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.prod {
+  width: 100%;
+  min-height: 100vh;
+  justify-content: center;
+  background: linear-gradient(rgba(64, 64, 66, 0.623), rgba(32, 32, 33, 0.733)), url(https://shorturl.at/hzJ35) no-repeat center center fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.prod .slider-container {
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+.prod .slider-container .slider {
+  display: flex;
+  cursor: grab;
+}
+.prod .slider-container .slider .btn-mas {
+  margin-left: 55px;
+  background-color: #68692e;
+  color: rgb(241, 235, 235);
+  border: #585828 solid 1px;
+}
+.prod .slider-container .slider .item {
+  display: flex;
   width: 250px;
-  height: 250px;
+  height: 350px;
+  overflow: hidden;
+  margin: 20px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  pointer-events: none;
+}
+.prod .slider-container .slider .item img {
+  min-width: 100%;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  transition: all ease-out 1s;
+}
+.prod .slider-container .slider .item img:hover {
+  transform: scale(1.1);
+}
+.prod .list-title {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all 0.5s ease;
+}
+.prod .list-title:hover {
+  transform: scale(0.9);
+  color: #8a8a46;
+  cursor: context-menu;
 }/*# sourceMappingURL=itemList.css.map */

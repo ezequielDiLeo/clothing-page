@@ -1,0 +1,43 @@
+.contenedor-footer{
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    padding-right: 60px;
+    background-color: #241d1d;
+    color: aliceblue;
+    .contenedor-info{
+        justify-content: end;
+        text-align: end;
+        .foot{
+            color: aliceblue;
+            transition: all ease 1s;
+        }
+        .foot:hover{
+            transform: scale(1.02);
+            color: rgb(177, 153, 22);
+        }
+    }
+
+    .container-btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: aliceblue;
+        .btn-red{
+            padding: 15px;
+            transition: all ease 0.5s;
+        }
+        .btn-red:hover{
+            transform: scale(1.1);
+            color: rgb(177, 153, 22);
+        }
+        img{
+            width: 20px;
+            height: 20px;
+        }
+
+    }
+}
+
