@@ -9,13 +9,17 @@
   -o-object-fit: cover;
      object-fit: cover;
   color: white;
+  font-family: "Courier New", Courier, monospace;
 }
 .container-pr .title-prod {
   font-size: 25px;
   color: rgb(255, 255, 255);
 }
 .container-pr .contenedor-pr {
+  width: 100%;
   padding: 50px;
+  display: flex;
+  justify-content: center;
 }
 .container-pr .contenedor-pr .cont-img {
   display: flex;

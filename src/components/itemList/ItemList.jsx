@@ -3,12 +3,15 @@ import './itemList.scss'
 import { Button } from '../Button/Button'
 import { Link } from 'react-router-dom'
 import { motion } from "framer-motion"
+import { Form } from '../../hooks/useFormik/useFormik'
+import  gif  from '../../assets/img/gif.gif'
 
 export const ItemList = ({productos}) => {
+  
 
   return (
     <>
-    <section className='container-publi'>
+      <section className='container-publi'>
         <section className='publicidad'>
           <h1 className='title-publicidad'><code><span className='span'>Clothing</span> Your store</code></h1>
           <hr />
@@ -23,7 +26,7 @@ export const ItemList = ({productos}) => {
             {/*catalogo de prodctos*/}
           <motion.div className='contenedor-prod flex flex-wrap gap-5 slider-container'>
             <motion.div className='slider' drag='x'
-            dragConstraints={{right: 0, left: -500}}>
+            dragConstraints={{right: 0, left: -140}}>
               
               {productos.map((item) => (
                 <article key={item.id} className='justify-center'>
@@ -42,6 +45,14 @@ export const ItemList = ({productos}) => {
               ))}
               </motion.div>
           </motion.div>
+        </section>
+        <section className='contenedor-form-img'>
+          <div className='cont-form'>
+              <Form />
+          </div>
+          <div className='cont-img-form'>
+              <img className="img-gif" src= { gif } alt="gif" />
+          </div>
         </section>
       </section>
     </>

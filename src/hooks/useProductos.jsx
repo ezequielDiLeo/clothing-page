@@ -8,21 +8,21 @@ import { useParams } from 'react-router-dom'
 export const useProductos = () => {
     const [productos, setProductos] = useState ([])
     const [loading, setLoading] = useState (true)
-    const {categoryId} = useParams()
+    const {categoryName} = useParams()
 
     useEffect(() =>{
         setLoading (true)
 
         Datos()
             .then((data) => {
-                {const id = categoryId 
-                            ? data.filter(products => products.category === categoryId)
-                            : data}
+                const id = categoryName 
+                            ? data.filter(products => products.category === categoryName)
+                            : data
 
-                setProductos( id )
+                setProductos (id)
             }) 
             .finally(()=> setLoading(false))
-    }, [categoryId])
+    }, [categoryName])
 
     return {
         productos,

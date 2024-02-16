@@ -4,6 +4,7 @@
   justify-content: center;
   background-color: #3f3d34;
   color: white;
+  font-family: "Times New Roman", Times, serif;
 }
 .container-publi .publicidad {
   width: 100%;
@@ -36,8 +37,7 @@
   -o-object-fit: contain;
      object-fit: contain;
 }
-
-.prod {
+.container-publi .prod {
   width: 100%;
   min-height: 100vh;
   justify-content: center;
@@ -46,21 +46,21 @@
   background-position: center;
   background-size: contain;
 }
-.prod .slider-container {
+.container-publi .prod .slider-container {
   margin: 0 auto;
   overflow-x: hidden;
 }
-.prod .slider-container .slider {
+.container-publi .prod .slider-container .slider {
   display: flex;
   cursor: grab;
 }
-.prod .slider-container .slider .btn-mas {
+.container-publi .prod .slider-container .slider .btn-mas {
   margin-left: 55px;
   background-color: #68692e;
   color: rgb(241, 235, 235);
   border: #585828 solid 1px;
 }
-.prod .slider-container .slider .item {
+.container-publi .prod .slider-container .slider .item {
   display: flex;
   width: 250px;
   height: 350px;
@@ -71,17 +71,17 @@
   align-items: center;
   pointer-events: none;
 }
-.prod .slider-container .slider .item img {
+.container-publi .prod .slider-container .slider .item img {
   min-width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   transition: all ease-out 1s;
 }
-.prod .slider-container .slider .item img:hover {
+.container-publi .prod .slider-container .slider .item img:hover {
   transform: scale(1.1);
 }
-.prod .list-title {
+.container-publi .prod .list-title {
   display: flex;
   align-items: center;
   text-align: center;
@@ -89,8 +89,16 @@
   font-size: 20px;
   transition: all 0.5s ease;
 }
-.prod .list-title:hover {
+.container-publi .prod .list-title:hover {
   transform: scale(0.9);
   color: #8a8a46;
   cursor: context-menu;
+}
+.container-publi .contenedor-form-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(233, 250, 250);
+  background-color: #000000;
+  padding: 20px;
 }/*# sourceMappingURL=itemList.css.map */

@@ -1,0 +1,39 @@
+.contenedor-news {
+  width: 100%;
+  height: auto;
+}
+.contenedor-news .contenedor-form {
+  width: auto;
+  font-family: "Courier New", Courier, monospace;
+}
+.contenedor-news .contenedor-form .news {
+  width: auto;
+  padding: 15px;
+}
+.contenedor-news .contenedor-form .susc {
+  padding: 15px;
+  font-size: 25px;
+  width: auto;
+}
+.contenedor-news .contenedor-form .suscribite {
+  padding: 15px;
+  width: auto;
+}
+.contenedor-news .contenedor-form .form {
+  padding: 15px;
+  text-align: center;
+}
+.contenedor-news .contenedor-form .form .mail {
+  max-width: 500px;
+  padding-left: 15px;
+}
+.contenedor-news .contenedor-form .form .btn-form {
+  background-color: #fff;
+  color: black;
+  max-width: 110px;
+  height: 30px;
+  font-size: 12px;
+}
+.contenedor-news .contenedor-form .form .invalido {
+  font-size: 12px;
+}/*# sourceMappingURL=useFormik.css.map */

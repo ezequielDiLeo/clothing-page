@@ -8,6 +8,7 @@
     background-position: center;
     object-fit: cover;
     color: white;
+    font-family: 'Courier New', Courier, monospace;
     
     .title-prod{
         font-size: 25px;
@@ -15,7 +16,10 @@
     }
     
     .contenedor-pr{
+        width: 100%;
         padding: 50px;
+        display: flex;
+        justify-content: center;
 
         .cont-img{
             display: flex;

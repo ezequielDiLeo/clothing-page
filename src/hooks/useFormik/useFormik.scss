@@ -1,0 +1,40 @@
+.contenedor-news{
+    width: 100%;
+    height: auto;
+    .contenedor-form{
+        width: auto;
+        font-family: 'Courier New', Courier, monospace;
+        .news{
+            width: auto;
+            padding: 15px;
+        }
+        .susc{
+            padding: 15px;
+            font-size: 25px;
+            width: auto;
+        }
+        .suscribite{
+            padding: 15px;
+            width: auto;
+        }
+        .form{
+            padding: 15px;
+            text-align: center;
+
+            .mail{
+                max-width: 500px;
+                padding-left: 15px;
+            }
+            .btn-form{
+                background-color: #fff;
+                color: black;
+                max-width: 110px;
+                height: 30px;
+                font-size: 12px;
+            }
+            .invalido{
+                font-size: 12px;
+            }
+        }
+    }
+}

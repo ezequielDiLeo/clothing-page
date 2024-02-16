@@ -25,7 +25,7 @@ function App() {
                 <Route path='/pokeapi' element={<PokeApi />} />
                 <Route path='/item/:itemId' element={<ItemDetailContainer />}/>
                 <Route path='cart' element={<CartView/>} />
-                <Route path='/productos/:categoryID' element={ <ItemListContainer /> }/>
+                <Route path='/productos/:categoryName' element={ <ItemListContainer /> }/>
                 <Route path='/items/:categoryId' element= { <ItemProductContainer /> } />
                 <Route path='*' element= { <h2 className=''>Page Not Found ERR 404</h2> } />
               </Routes>
