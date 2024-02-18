@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react' 
-import { Datos } from '../utils/utils'
 import { useParams } from 'react-router-dom'
+import { collection, getDocs } from 'firebase/firestore' 
+import { db } from '../firebase/config'
 
 
 //con array de objetos propios
@@ -13,15 +14,23 @@ export const useProductos = () => {
     useEffect(() =>{
         setLoading (true)
 
-        Datos()
-            .then((data) => {
-                const id = categoryName 
-                            ? data.filter(products => products.category === categoryName)
-                            : data
+        //armar ref (sync)
+        const productosRef = collection(db, 'productos')
+        //llamar ref (async)
+        getDocs( productosRef )
+            .then((querySnapshot) => {
+                const docs = querySnapshot.docs.map(doc => {
+                    return {
+                        ...doc.data(),
+                        id: doc.id
+                    }
+                })
+                console.log( docs )
 
-                setProductos (id)
-            }) 
-            .finally(()=> setLoading(false))
+                setProductos( docs )
+            })
+            .finally(() => setLoading(false))
+
     }, [categoryName])
 
     return {

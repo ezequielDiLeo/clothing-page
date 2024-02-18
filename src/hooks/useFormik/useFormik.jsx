@@ -35,7 +35,7 @@ export const Form = () => {
               <input className='text-black mail' onChange={handleChange} name='email' type="email" placeholder='e-mail' />
               <br />
               <Button type='submit' className='btn-form'> Subscribirse </Button>
-              {errors.email && <p className='invalido'>Email invalido, asegurese de ingresarlo correctamente y haber utilizado "@"</p>}
+              {errors.email && <p className='invalido text-red-600'>Email invalido, asegurese de ingresarlo correctamente y haber utilizado "@"</p>}
             </form>
           </div>
         </section>

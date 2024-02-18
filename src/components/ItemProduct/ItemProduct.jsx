@@ -18,7 +18,7 @@ export const ItemProduct = ({product}) => {
             <h3 className='text-2x1 font-semibold text-center'>{prod.name}</h3>
             <p className='text-xl font-bold text-center'>${prod.price}</p>
               
-            <Link to={`/item/${prod.id}`}><Button className='btn-mas'>
+            <Link to={`/item/${prod.name}`}><Button className='btn-mas'>
               ver más
             </Button></Link>
           </article>

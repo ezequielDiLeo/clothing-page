@@ -13,7 +13,7 @@ export const ItemList = ({productos}) => {
     <>
       <section className='container-publi'>
         <section className='publicidad'>
-          <h1 className='title-publicidad'><code><span className='span'>Clothing</span> Your store</code></h1>
+          <h1 className='title-publicidad'><span className='span'>Clothing</span> Your store</h1>
           <hr />
           <div className="cont-publicidad">
           </div>

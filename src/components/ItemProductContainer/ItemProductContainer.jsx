@@ -1,9 +1,12 @@
 
 import React, { useEffect, useState } from 'react'
 import { ItemProduct } from '../itemProduct/itemProduct'
-import { Datos } from '../../utils/utils'
+//import { Datos } from '../../utils/utils'
 import '../ItemProduct/ItemProduct.scss'
 import { useParams } from 'react-router-dom'
+import { db } from '../../firebase/config'
+import { collection,getDocs } from 'firebase/firestore'
+
 
 export const ItemProductContainer = () => {
     const [loading, setLoading] = useState(true)
@@ -14,12 +17,20 @@ export const ItemProductContainer = () => {
     useEffect(() => {
         setLoading(true)
 
-        Datos()
-            .then(data =>{
-                const item = categoryId 
-                                    ? data.filter(prod => prod.category === categoryId)
-                                    :data
-                setProduct (item)
+        const docRef = collection(db, 'productos')
+        //llamar la ref
+        getDocs( docRef )
+            .then((DocumentSnapshot) =>{
+                console.log(DocumentSnapshot.id)
+                const docs = DocumentSnapshot.docs.filter(doc => {
+                    return {
+                        ...doc.category,
+                        id: doc.id
+                    }
+                })
+                console.log( docs )
+
+                setProduct( docs )
             })
             .finally(() => setLoading(false))
     }, [categoryId])
