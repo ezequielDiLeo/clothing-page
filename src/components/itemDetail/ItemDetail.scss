@@ -1,34 +1,12 @@
 .detail_container{
+    padding-top: 5px;
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(rgba(20, 20, 20, 0.959), rgba(0, 0, 0, 0.616)), url("../../assets/img/logoTienda.png") fixed;
+    background-color: rgb(241, 241, 241);
     background-position: center;
     background-repeat: no-repeat;
-    font-family: 'Courier New', Courier, monospace;
-
-    .desc{
-        display: flex;
-        width: 85%;
-        text-align: center;
-        align-items: center;
-        .img{
-            width: 350px;
-            height: 450px;
-            object-fit: cover;
-            border-radius: 2%;
-        }
-            
-        .descripcion{
-            display: flex;
-            justify-content: end;
-            text-align: justify;
-            padding: 15px;
-            color: rgb(235, 227, 227);
-            font-weight: 300;
-            background-color: #1b1a1a48;
-        }
-    }
-
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
     .btn-volver{
         margin-top: 20px;
         width: 50px;
@@ -36,47 +14,102 @@
         font-size: 10px;
         background-color: #524d25;
     }
+    .contenedor-all{
+        max-height: 200vh;
+        display: flex;
+        justify-content: space-between;
+        margin: 20px;
 
-    .title{
-        font-size: 30px;
-    }
+        .car-img{
+            padding-right: 10px;
+            img{
+                max-height: 120px;
+                margin: 5px;
+                cursor: pointer;
+            }
+        }
+
+        .cont-img{
+            max-width: 45%;
+            max-height: 650px;
+            display: flex;
+            img{
+                width: auto;
+                height: auto;
+                cursor: pointer;
+            }
+        }
+        .desc{
+            width: 50%;
+            padding-top: 20px;
+            .title-desc{
+                padding-left: 15px;
+            }
+            
+            .price{
+                color: rgb(0, 0, 0);
+                padding-left: 15px;
+            }
+                
+            .descripcion{
+                text-align: justify;
+                font-size: 12px;
+                padding: 15px;
+                color: rgb(0, 0, 0);
+            }
+
+            .cont-fn{
+                display: flex;
+                justify-content: center;
+                .btn-fn{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: auto;
+                    height: 35px;
+                    font-size: 10px;
+                    font-weight: lighter;
+                    background-color: rgb(101, 102, 43);
+                }
+            }
+
+            .cont-agregar{
+                display: flex;
+                justify-content: center;
+                .btn-agregar{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 90%;
+                    height: 35px;
+                    font-size: 12px;
+                    font-weight: lighter;
+                    background-color: rgb(101, 102, 43);
+                    margin-bottom: 50px;
+                }
+            }
+        }
     
-    .price{
-        color: rgb(255, 255, 255);
-        padding: 0 0 20px 155px;
-    }
-
-    .btn-fn{
-        align-items: center;
-        margin-left: 150px;
-        width: auto;
-        height: 40px;
-        font-size: 12px;
-        background-color: rgb(18, 72, 88);
-        margin-bottom: 100px;
-    }
-
-    .btn-agregar{
-        margin-left: 130px;
-        width: 110px;
-        height: 35px;
-        font-size: 10px;
-        background-color: rgb(71, 67, 23);
-        margin-bottom: 50px;
-    }
-
-    .contenedor-cant {
-        margin-left: 125px;
-        
-        .btn-cant{
+        .contenedor-cant {
             display: flex;
             justify-content: center;
-            align-items: center;
-            width: 25px;
-            height: 20px;
-            font-size: 10px;
-            background-color: rgb(71, 67, 23);
+            .btn-cant{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 25px;
+                height: 20px;
+                font-size: 10px;
+                background-color: rgb(71, 67, 23);
+            }
         }
+    }
+
+    .mas-prod{
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 60%;
     }
     
 }

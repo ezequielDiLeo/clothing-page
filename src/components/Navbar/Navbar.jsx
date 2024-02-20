@@ -47,8 +47,8 @@ export const Navbar = () => {
                      to={link.href} 
                      className={({ isActive }) =>
                       isActive
-                        ? "text-blue-900 text-lg  font-bold"
-                        : "text-black"
+                        ? "text-blue-900 font-bold text-base"
+                        : "text-black text-sm"
                      }> 
                      {link.label}
                      </NavLink>

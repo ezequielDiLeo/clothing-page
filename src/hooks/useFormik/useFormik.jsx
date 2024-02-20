@@ -18,9 +18,6 @@ export const Form = () => {
             email:'',
             password:''
         },
-        onSubmit:(values) =>{
-            console.log(values)
-        },
         validationSchema: LoginSchema
     })
   return (

@@ -9,6 +9,7 @@ import { CartProvider } from './components/Cartwidget/CartContext'
 import { CartView } from './components/CartView/CartView'
 import { ItemProductContainer } from './components/ItemProductContainer/ItemProductContainer'
 import { Footer } from './components/Footer/Footer'
+import { Checkout } from './components/Checkout/Checkout'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
               <Routes>
                 <Route path='/' element={<ItemListContainer />}/> 
                 <Route path='/pokeapi' element={<PokeApi />} />
+                <Route path='/checkout' element={<Checkout />}/>
                 <Route path='/item/:itemId' element={<ItemDetailContainer />}/>
                 <Route path='cart' element={<CartView/>} />
                 <Route path='/productos/:categoryName' element={ <ItemListContainer /> }/>

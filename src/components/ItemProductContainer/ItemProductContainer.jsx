@@ -1,30 +1,31 @@
 
 import React, { useEffect, useState } from 'react'
 import { ItemProduct } from '../itemProduct/itemProduct'
-//import { Datos } from '../../utils/utils'
 import '../ItemProduct/ItemProduct.scss'
 import { useParams } from 'react-router-dom'
 import { db } from '../../firebase/config'
-import { collection,getDocs } from 'firebase/firestore'
+import { collection,getDocs, query, where } from 'firebase/firestore'
 
 
 export const ItemProductContainer = () => {
     const [loading, setLoading] = useState(true)
     const [product, setProduct] = useState([]) 
 
-    const {categoryId} = useParams()
+    const {categoryId} = useParams();
 
     useEffect(() => {
         setLoading(true)
 
         const docRef = collection(db, 'productos')
+
+        const q = query(docRef, where("category", "==", categoryId))
         //llamar la ref
-        getDocs( docRef )
-            .then((DocumentSnapshot) =>{
-                console.log(DocumentSnapshot.id)
-                const docs = DocumentSnapshot.docs.filter(doc => {
+        getDocs( q )
+            .then((QuerySnapshot) =>{
+                console.log(QuerySnapshot.id)
+                const docs = QuerySnapshot.docs.map(doc => {
                     return {
-                        ...doc.category,
+                        ...doc.data(),
                         id: doc.id
                     }
                 })
@@ -39,7 +40,7 @@ export const ItemProductContainer = () => {
     <>
         {
             loading ?
-            ( <h2 className='text-center text-4xl mt-8 '> Cargando.. </h2>)
+            ( <h2 className='text-center text-4xl mt-8 h-screen font-sans '> Cargando.. </h2>)
             : <ItemProduct  product={product}/>
         }
     </>

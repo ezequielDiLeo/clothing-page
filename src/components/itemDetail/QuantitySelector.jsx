@@ -14,7 +14,7 @@ export const QuantitySelector = ({cantidad, stock, setCantidad}) => {
   return (
         <div className='contenedor-cant flex gap-4 items-center'>
             <Button className='btn-cant' onClick={handleRestar}>-</Button>
-            <span className='text-white'>{cantidad}</span>
+            <span className='text-black'>{cantidad}</span>
             <Button className='btn-cant' onClick={handleSumar}>+</Button>
         </div>
   )

@@ -20,13 +20,13 @@ export const ItemList = ({productos}) => {
         </section> 
         <section className='prod list_contaier h-full'>
 
-            <h1 className='list-title'> <code>Tienda Online</code></h1>
+            <h1 className='list-title text-light text-normal'>Destacados de la semana</h1>
             <hr />
 
             {/*catalogo de prodctos*/}
           <motion.div className='contenedor-prod flex flex-wrap gap-5 slider-container'>
             <motion.div className='slider' drag='x'
-            dragConstraints={{right: 0, left: -140}}>
+            dragConstraints={{right: 0, left: -240}}>
               
               {productos.map((item) => (
                 <article key={item.id} className='justify-center'>
