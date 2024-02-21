@@ -71,16 +71,19 @@ export const Checkout = () => {
   return (
     <>
         <div className='cont-checkout'>
-            <h2 className='datos'>Ingresa tus datos</h2>
+            <h2 className='datos'>Ingresa tus datos para finalizar la compra</h2>
             <hr />
-
-            <form onSubmit={handleSubmit} className='formu'>
-                <input className='input' name="Nombre" type="text" placeholder='Nombre' value={values.Nombre} onChange={handleImputChange}/>
-                <input className='input' name="Direccion" type="text" placeholder='Direccion' value={values.Direccion} onChange={handleImputChange}/>
-                <input className='input' name="email" type="mail" placeholder='E-mail' value={values.email} onChange={handleImputChange}/>
-                <input className='input' name="Doc" type="text" placeholder='Doc' value={values.Doc} onChange={handleImputChange}/>
-                <Button type="submit" className='btn-form'>enviar</Button> 
-            </form>
+            <div className='cont-formu'>
+                <form onSubmit={handleSubmit} className='formu'>
+                    <input className='input' name="Nombre" type="text" placeholder='Nombre' value={values.Nombre} onChange={handleImputChange}/>
+                    <input className='input' name="Direccion" type="text" placeholder='Direccion' value={values.Direccion} onChange={handleImputChange}/>
+                    <input className='input' name="email" type="mail" placeholder='E-mail' value={values.email} onChange={handleImputChange}/>
+                    <input className='input' name="Doc" type="text" placeholder='Doc' value={values.Doc} onChange={handleImputChange}/>
+                    <div className='cont-form'>
+                        <Button type="submit" className='btn-form'>enviar</Button> 
+                    </div>
+                </form>
+            </div>
         </div>
     </>
   )

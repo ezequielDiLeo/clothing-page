@@ -9,8 +9,7 @@ export const Form = () => {
 
     const LoginSchema = Yup.object().shape({
         email: Yup.string().email('Email invalido').required(),
-        password: Yup.number().required(),
-        password: Yup.string().required()
+        password: Yup.number().required()
     })
 
     const {handleSubmit, handleChange, errors} = useFormik({

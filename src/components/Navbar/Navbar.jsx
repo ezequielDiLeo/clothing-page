@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Navbar.scss'
 import logo from '../../assets/img/logoTienda.png'
 import { Cartwidget } from '../Cartwidget/Cartwidget'
 import { Link, NavLink } from 'react-router-dom'
+import { UserContext } from '../../context/UserContext/UserContext'
+import { Button } from '../Button/Button'
 
 /*......LINKS.....*/ 
 const links = [
@@ -34,6 +36,8 @@ const links = [
 
 
 export const Navbar = () => {
+  const {user, logOut} = useContext(UserContext)
+
   return (
     <header className='header'>
         <div className='header_container'>
@@ -60,6 +64,11 @@ export const Navbar = () => {
         <div className='cart'>
             <Cartwidget />
         </div>
+          {user.logged && 
+          <div className='flex gap-4 items-end'>
+            <p className='text-black'>{user.mail}</p>
+            <Button onClick={logOut} className='text-xs '>Cerrar Sesión</Button>
+          </div>}
     </header>
   )
 }
