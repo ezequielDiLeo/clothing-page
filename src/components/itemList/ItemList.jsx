@@ -37,9 +37,8 @@ export const ItemList = ({productos}) => {
                   {/* <p className='text-center '>{item.description}</p> */}
                   <p className='font-semibold text-center'>${item.price}</p>
                   
-                  <Button className='btn-mas'>
-                    <Link to={`/items/${item.category}`}>ver más</Link>
-                  </Button>
+                  <Link to={`/items/${item.category}`}><Button className='btn-mas'>
+                    ver más</Button></Link>
                 </article>
             
               ))}

@@ -17,18 +17,24 @@ body{
       width: 100%;
       display: flex;
       justify-content: space-around;
-      margin: 0 auto;
-
-      .logo{
-        width: 85px;
-        height: 75px;
+      margin: auto;
+      .cont-img{
+        width: 8%;
+        height: 100%;
+        .logo{
+          width: 100%;
+          height: auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
 
       .navbar{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 20px;
+        gap: 40px;
   
         .navbar_link{
           text-decoration: none;
@@ -41,10 +47,30 @@ body{
       }
     }
     .cart{
-      width: 25%;
-      display: flex;
+      width: 20%;
       justify-content: space-around;
+      display: flex;
       margin: 0 auto;
+    }
+
+    .logOut-cont{
+      width: 15%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .user{
+        font-size: 8px;
+        text-decoration:underline;
+      }
+      .btn-logOut{
+        width: 32px;
+        display: flex;
+        justify-content: center;
+        min-height: auto;
+        background-color: #fff;
+        border: 1px solid black;
+      }
     }
   }
 

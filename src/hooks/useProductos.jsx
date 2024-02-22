@@ -25,7 +25,6 @@ export const useProductos = () => {
                         id: doc.id
                     }
                 })
-                console.log( docs )
 
                 setProductos( docs )
             })

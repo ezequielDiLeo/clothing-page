@@ -16,6 +16,7 @@
     }
     .contenedor-all{
         max-height: 200vh;
+        width: 100%;
         display: flex;
         justify-content: space-between;
         margin: 20px;
@@ -34,7 +35,7 @@
             max-height: 650px;
             display: flex;
             img{
-                width: auto;
+                width: 100%;
                 height: auto;
                 cursor: pointer;
             }

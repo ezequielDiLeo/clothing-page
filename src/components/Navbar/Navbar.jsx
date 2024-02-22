@@ -5,6 +5,7 @@ import { Cartwidget } from '../Cartwidget/Cartwidget'
 import { Link, NavLink } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext/UserContext'
 import { Button } from '../Button/Button'
+import salir from '../../assets/img/cerrar-sesion.png'
 
 /*......LINKS.....*/ 
 const links = [
@@ -41,7 +42,7 @@ export const Navbar = () => {
   return (
     <header className='header'>
         <div className='header_container'>
-            <Link to="/"><img className="logo" src={logo} alt="logo" /></Link> 
+            <Link className='cont-img' to="/"><img className="logo" src={logo} alt="logo" /></Link> 
 
             <nav className='navbar'>
                 {
@@ -65,9 +66,9 @@ export const Navbar = () => {
             <Cartwidget />
         </div>
           {user.logged && 
-          <div className='flex gap-4 items-end'>
-            <p className='text-black'>{user.mail}</p>
-            <Button onClick={logOut} className='text-xs '>Cerrar Sesión</Button>
+          <div className='logOut-cont'>
+            <Button onClick={logOut} className='btn-logOut text-xs '><img src={salir} alt="cerrar sesion" /></Button>
+            <p className='text-black user'>{user.email}</p>
           </div>}
     </header>
   )

@@ -46,8 +46,6 @@ export const AppRouter = () => {
                 </>
             )}
 
-
-
         </BrowserRouter>
     </>
   )
