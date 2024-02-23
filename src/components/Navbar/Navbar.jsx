@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import './Navbar.scss'
-import logo from '../../assets/img/logoTienda.png'
+import logo from '../../assets/img/logoTienda.jpg'
 import { Cartwidget } from '../Cartwidget/Cartwidget'
 import { Link, NavLink } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext/UserContext'

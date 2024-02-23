@@ -22,14 +22,12 @@ export const ItemProductContainer = () => {
         //llamar la ref
         getDocs( q )
             .then((QuerySnapshot) =>{
-                console.log(QuerySnapshot.id)
                 const docs = QuerySnapshot.docs.map(doc => {
                     return {
                         ...doc.data(),
                         id: doc.id
                     }
                 })
-                console.log( docs )
 
                 setProduct( docs )
             })

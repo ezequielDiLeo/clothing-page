@@ -4,7 +4,7 @@ import { Button } from '../Button/Button'
 import { Link } from 'react-router-dom'
 import { motion } from "framer-motion"
 import { Form } from '../../hooks/useFormik/useFormik'
-import  gif  from '../../assets/img/gif.gif'
+import  gif  from '../../assets/img/gifGif.gif'
 
 export const ItemList = ({productos}) => {
   
@@ -26,7 +26,7 @@ export const ItemList = ({productos}) => {
             {/*catalogo de prodctos*/}
           <motion.div className='contenedor-prod flex flex-wrap gap-5 slider-container'>
             <motion.div className='slider' drag='x'
-            dragConstraints={{right: 0, left: -240}}>
+            dragConstraints={{right: 0, left: -410}}>
               
               {productos.map((item) => (
                 <article key={item.id} className='justify-center'>

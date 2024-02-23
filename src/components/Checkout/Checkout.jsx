@@ -5,7 +5,7 @@ import { Button } from '../Button/Button'
 import { useState } from 'react'
 import { CartContext } from '../Cartwidget/CartContext'
 import { db } from '../../firebase/config'
-import { collection, addDoc, updateDoc, getDoc, doc} from 'firebase/firestore'
+import { collection, addDoc} from 'firebase/firestore'
 
 export const Checkout = () => {
 
@@ -39,16 +39,6 @@ export const Checkout = () => {
         }
 
         const ordersRef = collection(db, 'orders')
-
-        // cart.forEach(item => {
-        //     const docRef = doc(db, "productos", item.id)
-        //     getDoc(docRef)
-        //         .then(doc => {
-        //             updateDoc(docRef, {
-        //                 stock: doc.data().stock - item.cantidad
-        //             })
-        //         })
-        // })
 
         addDoc(ordersRef, order)
             .then(doc => {
