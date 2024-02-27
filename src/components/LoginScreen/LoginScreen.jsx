@@ -2,15 +2,15 @@
 import './LoginScreen.scss'
 import { Button } from '../Button/Button'
 import { useContext, useState } from 'react'
-import { string } from '/yup'
+import * as Yup from "yup"
 import { UserContext } from '../../context/UserContext/UserContext'
 
 export const LoginScreen = () => {
     const {login, register} = useContext(UserContext)
 
     const [values, setValues] = useState ({
-        email: string,
-        password: string
+        email: Yup.string(),
+        password: Yup.string()
     })
 
     const handleInputChange = (e) => {
