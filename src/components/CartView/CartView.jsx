@@ -33,7 +33,7 @@ export const CartView = () => {
             {
                 cart.map((item) => (
                     <li key={item.id}  className='flex gap-3 border-b my-4 items-center'>
-                        <img src={item.img} alt=" cart img " className='w-32 rounded-md' />
+                        <img loading="lazy" src={item.img} alt=" cart img " className='w-32 rounded-md' />
                         <div className='text-white'>
                             <h3 className='font-light text'>{item.name}</h3>
                             <p className=' font-normal text-m text-white'>$ {item.price}</p>

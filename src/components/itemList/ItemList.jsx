@@ -31,7 +31,7 @@ export const ItemList = ({productos}) => {
               {productos.map((item) => (
                 <article key={item.id} className='justify-center'>
                   <motion.div className='item'>
-                    <img src={item.img} alt={item.name} className='imagen m-5 items-center justify-center' />
+                    <img src={item.img} alt={item.name} loading="lazy" className='imagen m-5 items-center justify-center' />
                   </motion.div>
                   <h3 className='text-2x1 font-semibold text-center'>{item.name}</h3>
                   {/* <p className='text-center '>{item.description}</p> */}
@@ -49,9 +49,9 @@ export const ItemList = ({productos}) => {
           <div className='cont-form'>
               <Form />
           </div>
-          <div className='cont-img-form'>
-              <img className="img-gif" src= { gif } alt="gif" />
-          </div>
+          {/* <div className='cont-img-form'>
+              <img className="img-gif" loading="lazy" src= { gif } alt="gif" />
+          </div> */}
         </section>
       </section>
     </>

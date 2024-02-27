@@ -11,7 +11,7 @@ export const Cartwidget = () => {
   return (
 
     <Link to="/cart" className='flex items-center gap-1 cursor-pointer'>
-        <img src={cartIcon} alt="Cart Icon" className='w-5'/>
+        <img loading="lazy" src={cartIcon} alt="Cart Icon" className='w-5'/>
         <span className='text-black text-1xl'>{ itemInCart() }</span>
     </Link>
 

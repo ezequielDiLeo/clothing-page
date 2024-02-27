@@ -42,7 +42,7 @@ export const Navbar = () => {
   return (
     <header className='header'>
         <div className='header_container'>
-            <Link className='cont-img' to="/"><img className="logo" src={logo} alt="logo" /></Link> 
+            <Link className='cont-img' to="/"><img loading="lazy" className="logo" src={logo} alt="logo" /></Link> 
 
             <nav className='navbar'>
                 {
@@ -66,10 +66,10 @@ export const Navbar = () => {
             <Cartwidget />
         </div>
           {user.logged && 
-          <div className='logOut-cont'>
-            <Button onClick={logOut} className='btn-logOut text-xs '><img src={salir} alt="cerrar sesion" /></Button>
-            <p className='text-black user'>{user.email}</p>
-          </div>}
+            <div className='logOut-cont'>
+              <Button onClick={logOut} className='btn-logOut text-xs '><img src={salir} alt="cerrar sesion" /></Button>
+              <p className='text-black user'>{user.email}</p>
+            </div>}
     </header>
   )
 }

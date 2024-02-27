@@ -35,13 +35,13 @@ export const ItemDetail = ({item}) => {
             <hr />
             <div className='contenedor-all'>
               <div className='car-img'>
-                <img src={item.img} alt={item.name} />
-                <img src={item.img} alt={item.name} />
-                <img src={item.img} alt={item.name} />
-                <img src={item.img} alt={item.name} />
+                <img loading="lazy" src={item.img} alt={item.name} />
+                <img loading="lazy" src={item.img} alt={item.name} />
+                <img loading="lazy" src={item.img} alt={item.name} />
+                <img loading="lazy" src={item.img} alt={item.name} />
               </div>
               <div className="cont-img">
-                <img src={item.img} alt={item.name} className='img' />
+                <img loading="lazy" src={item.img} alt={item.name} className='img' />
               </div>
               <div className='desc'>
                 <h1 className='title-desc'>{item.name}</h1>
