@@ -2,7 +2,7 @@
 import './LoginScreen.scss'
 import { Button } from '../Button/Button'
 import { useContext, useState } from 'react'
-import { string } from 'yup'
+import { string } from '/yup'
 import { UserContext } from '../../context/UserContext/UserContext'
 
 export const LoginScreen = () => {
