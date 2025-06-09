@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: linear-gradient(rgba(27, 27, 27, 0.897), rgba(14, 13, 13, 0.685)), url("../../assets/img/fondoDetail.jpg") fixed;
+  background: linear-gradient(rgba(27, 27, 27, 0.897), rgba(14, 13, 13, 0.685)),fixed;
   background-position: center;
   -o-object-fit: cover;
      object-fit: cover;

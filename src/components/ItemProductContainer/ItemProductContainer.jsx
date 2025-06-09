@@ -1,6 +1,6 @@
 
-import React, { useEffect, useState } from 'react'
-import { ItemProduct } from '../itemProduct/itemProduct'
+import { useEffect, useState } from 'react'
+import { ItemProduct } from '../ItemProduct/ItemProduct'
 import '../ItemProduct/ItemProduct.scss'
 import { useParams } from 'react-router-dom'
 import { db } from '../../firebase/config'
