@@ -1,12 +1,24 @@
-import React from 'react'
 import { Button } from '../Button/Button'
 import { Link } from 'react-router-dom'
 import './ItemProduct.scss'
+import PropTypes from 'prop-types';
 
 export const ItemProduct = ({product}) => {
+
+    ItemProduct.propTypes = {
+      product: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.any.isRequired,
+          name: PropTypes.string.isRequired,
+          price: PropTypes.number.isRequired,
+          img: PropTypes.string.isRequired,
+          category: PropTypes.string.isRequired,
+        })
+      ).isRequired,
+    };
+
   return (
     <section className='container-pr'>
-      <h1 className='title-prod'>Clothing</h1>
       <hr />
       <div>
         <div className='contenedor-pr'>

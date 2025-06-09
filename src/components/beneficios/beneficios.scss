@@ -1,0 +1,40 @@
+.benefits {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111;
+  color: white;
+  padding: 1.5rem 3rem;
+  font-family: 'Inter', sans-serif;
+  gap: 2rem;
+  flex-wrap: wrap;
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+  }
+
+  &__icon {
+    font-size: 2rem;
+    color: white;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__desc {
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+    color: #ccc;
+  }
+
+  span {
+    margin-left: 4px;
+  }
+}

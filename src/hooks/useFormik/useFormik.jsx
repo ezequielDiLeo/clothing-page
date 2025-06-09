@@ -1,40 +1,62 @@
-
-import React from 'react'
 import './useFormik.scss'
 import { useFormik } from 'formik'
 import { Button } from '../../components/Button/Button'
 import * as Yup from 'yup'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const Form = () => {
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string().email('Email inválido').required('Este campo es obligatorio'),
+  })
 
-    const LoginSchema = Yup.object().shape({
-        email: Yup.string().email('Email invalido').required(),
-        password: Yup.number().required("has ingresado una contraseña incorrecta")
-    })
+  const { handleSubmit, handleChange, handleBlur, values, touched, errors } = useFormik({
+    initialValues: {
+      email: '',
+    },
+    validationSchema: LoginSchema,
+    onSubmit: (values, { resetForm }) => {
+      toast.success('¡Te has suscripto con éxito!', {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: 'dark',
+      })
+      resetForm()
+    }
+  })
 
-    const {handleSubmit, handleChange, errors} = useFormik({
-        initialValues:{
-            email:'',
-            password:''
-        },
-        validationSchema: LoginSchema
-    })
   return (
-    <>
-        <section className='contenedor-news'>
-          <div className='contenedor-form'>
-            <h1 className='news'>NEWSLETTER</h1>
-            <p className='susc font-semibold'>Suscribite a nuestro newsletter</p>
-            <p className='suscribite'>¿Querés recibir nuestras ofertas? ¡Suscribite!</p>
-            <hr />
-            <form onSubmit={handleSubmit} className='form'>
-              <input className='text-black mail' onChange={handleChange} name='email' type="email" placeholder='e-mail' />
-              <br />
-              <Button type='submit' className='btn-form'> Subscribirse </Button>
-              {errors.email && <p className='invalido text-red-600'>Email invalido, asegurese de ingresarlo correctamente y haber utilizado "@"</p>}
-            </form>
-          </div>
-        </section>
-    </>
+    <section className='newsletter'>
+      <div className='newsletter__form-container'>
+        <h1 className='newsletter__title'>NEWSLETTER</h1>
+        <p className='newsletter__subtitle'>Suscribite a nuestro newsletter</p>
+        <p className='newsletter__description'>¿Querés recibir nuestras ofertas? ¡Suscribite!</p>
+
+        <form onSubmit={handleSubmit} className='newsletter__form'>
+          <input
+            className='newsletter__input'
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.email}
+            name='email'
+            type='email'
+            placeholder='ejemplo@correo.com'
+          />
+          {errors.email && touched.email && (
+            <p className='newsletter__error'>{errors.email}</p>
+          )}
+
+          <Button type='submit' className='newsletter__button'>
+            Suscribirse
+          </Button>
+        </form>
+      </div>
+
+      <ToastContainer />
+    </section>
   )
 }

@@ -1,12 +1,11 @@
 
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import './Checkout.scss'
 import { Button } from '../Button/Button'
 import { useState } from 'react'
 import { CartContext } from '../Cartwidget/CartContext'
 import { db } from '../../firebase/config'
 import { collection, writeBatch, documentId, where, query, getDocs, addDoc } from 'firebase/firestore'
-import { onIdTokenChanged } from 'firebase/auth'
 import Swal from 'sweetalert2'
 
 export const Checkout = () => {
@@ -74,19 +73,20 @@ export const Checkout = () => {
                         })
                     })
         } else {
-            Swal.fire("sin stock", "en este momento nos encontramos sin stock de este producto :c", "error")
+            Swal.fire("sin stock", "en este momento nos encontramos sin stock de este producto")
         }
 
         };
 
-    // if (orderId){
-    //     return(
-    //         <div className="container-orden">
-    //             <h2 className='title-gra'>gracias por tu compra</h2>
-    //             <hr />
-    //         </div>
-    //     );
-    // }
+    if (orderId){
+        return(
+            <div className="container-orden">
+                <h2 className='title-gra'>Gracias por tu compra</h2>
+                <p>Tu número de orden es: <strong>{orderId}</strong></p>
+                <hr />
+            </div>
+        );
+    }
 
 
   return (

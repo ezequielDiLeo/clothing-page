@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
 import './Navbar.scss'
+import { useContext, useEffect, useState } from 'react'
 import logo from '../../assets/img/logoTienda.jpg'
 import { Cartwidget } from '../Cartwidget/Cartwidget'
 import { Link, NavLink } from 'react-router-dom'
@@ -37,39 +37,95 @@ const links = [
 
 
 export const Navbar = () => {
-  const {user, logOut} = useContext(UserContext)
+  const {user, logOut} = useContext(UserContext);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  return (
-    <header className='header'>
-        <div className='header_container'>
-            <Link className='cont-img' to="/"><img loading="lazy" className="logo" src={logo} alt="logo" /></Link> 
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
 
-            <nav className='navbar'>
-                {
-                  links.map((link)=> (
-                    <NavLink
-                     key={link.href} 
-                     to={link.href} 
-                     className={({ isActive }) =>
-                      isActive
-                        ? "text-blue-900 font-bold text-base"
-                        : "text-black text-sm"
-                     }> 
-                     {link.label}
-                     </NavLink>
-                  ))
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+      useEffect(() => {
+      if(menuOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+
+      return () => {
+        document.body.style.overflow = 'auto';
+      }
+    }, [menuOpen]);
+
+    return (
+    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+      <div className='header_container'>
+
+        {/* HAMBURGER A LA IZQUIERDA */}
+        {scrolled && (
+          <>
+            <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+              ☰
+            </button>
+            {menuOpen && (
+              <div className='modal-loyout' onClick={() => setMenuOpen(false)}>
+                <div className="menu-modal open" onClick={(e) => e.stopPropagation()}>
+                  <button className="close" onClick={() => setMenuOpen(false)}>✕</button>
+                  <nav className="modal-nav">
+                    {links.map(link => (
+                      <NavLink key={link.href} to={link.href} onClick={() => setMenuOpen(false)}>
+                        {link.label}
+                      </NavLink>
+                    ))}
+                  </nav>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* LOGO CENTRADO */}
+        <Link className='cont-img' to="/">
+          <img loading="lazy" className="logo" src={logo} alt="logo" />
+        </Link> 
+
+        {/* NAV HORIZONTAL SI NO HAY SCROLL */}
+        {!scrolled && (
+          <nav className={`navbar ${menuOpen ? 'open' : ''}`}>
+            {links.map((link) => (
+              <NavLink
+                key={link.href}
+                to={link.href}
+                className={({ isActive }) =>
+                  isActive ? "text-black font-bold text-base" : "text-black text-sm"
                 }
-            </nav>
-            
-        </div>
-        <div className='cart'>
-            <Cartwidget />
-        </div>
-          {user.logged && 
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </nav>
+        )}
+
+        <div className='actions'>
+          <Cartwidget />
+          {user.logged && !scrolled && (
             <div className='logOut-cont'>
-              <Button onClick={logOut} className='btn-logOut text-xs '><img src={salir} alt="cerrar sesion" /></Button>
+              <Button variant='white' onClick={logOut} className='btn-logOut text-xs '>
+                <img src={salir} alt="cerrar sesion" className='btn'/>
+              </Button>
               <p className='text-black user'>{user.email}</p>
-            </div>}
+            </div>
+          )}
+        </div>
+
+      </div>
     </header>
+
   )
 }

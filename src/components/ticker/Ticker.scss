@@ -1,0 +1,35 @@
+.ticker-container {
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.ticker {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollTicker 70s linear infinite;
+}
+
+.ticker span {
+  display: inline-block;
+  padding-right: 2rem;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ticker-container:hover .ticker {
+  animation-play-state: paused;
+}
+
+@keyframes scrollTicker {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

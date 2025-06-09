@@ -1,14 +1,28 @@
 
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Button } from '../Button/Button'
 import './ItemDetail.scss'
 import { QuantitySelector } from './QuantitySelector'
 import { CartContext } from '../Cartwidget/CartContext'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 
 export const ItemDetail = ({item}) => {
+
+      ItemDetail.propTypes = {
+        item: PropTypes.arrayOf(
+          PropTypes.shape({
+            id: PropTypes.any.isRequired,
+            name: PropTypes.string.isRequired,
+            price: PropTypes.number.isRequired,
+            img: PropTypes.string.isRequired,
+            category: PropTypes.string.isRequired,
+          })
+        ).isRequired,
+      };
+
   const navigate = useNavigate()
   const[cantidad, setCantidad]= useState(0)
   const { addToCart, isInCart } = useContext(CartContext)

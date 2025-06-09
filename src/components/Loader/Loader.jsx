@@ -1,6 +1,3 @@
-
-
-import React from 'react'
 import { Spinner } from './spinner'
 
 export const Loader = () => {

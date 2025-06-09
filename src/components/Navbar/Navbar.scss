@@ -1,80 +1,145 @@
+.header {
+  position: fixed;
+  width: 100%;
+  top: 25px;
+  z-index: 50;
+  background-color: white;
+  transition: all 0.3s ease;
 
-body{
-    margin: 0;
+  .header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 70px;
+    position: relative;
   }
-  
-  .header{
-    background-color: #ffffff;
-    width: 100%;
-    height: 80px;
+
+  .cont-img {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    z-index: 2;
+    transition: all 0.3s ease;
+    order: 1;
+  }
 
-    .header_container{
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      margin: auto;
-      .cont-img{
-        width: 8%;
-        height: 100%;
-        .logo{
-          width: 100%;
-          height: auto;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-      }
+  .logo {
+    height: 50px;
+    object-fit: contain;
+  }
 
-      .navbar{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 40px;
-  
-        .navbar_link{
-          text-decoration: none;
-          color: rgb(170, 167, 10);
-        }
-        
-        :hover{
-          color: #756f12;
-        }
-      }
-    }
-    .cart{
-      width: 20%;
-      justify-content: space-around;
-      display: flex;
-      margin: 0 auto;
-    }
+  .navbar {
+    display: flex;
+    gap: 1.5rem;
+    order: 2;
+  }
 
-    .logOut-cont{
-      width: 15%;
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    order: 3;
+    .logOut-cont {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      .user{
-        font-size: 8px;
-        text-decoration:underline;
+      padding-left: 15px;
+      .user {
+        font-size: 12px;
       }
-      .btn-logOut{
-        width: 32px;
-        display: flex;
-        justify-content: center;
-        min-height: auto;
-        background-color: #fff;
-        border: 1px solid black;
+    }
+    .btn-logOut {
+      padding-bottom: 0;
+      .btn{
+        height: 25px !important;
       }
     }
   }
 
-  
-  
-  
-    
+  &.scrolled {
+    .cont-img {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      order: 2;
+    }
+
+    .actions {
+      position: absolute;
+      right: 1rem;
+      order: 3;
+      .logOut-cont {
+        background-color: white;
+      }
+    }
+    .hamburger {
+      position: absolute;
+      left: 1rem;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 99;
+      order: 1;
+    }
+
+    .navbar {
+      display: none;
+    }
+  }
+}
+
+.modal-loyout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.7); /* fondo negro semi-transparente */
+  display: flex;
+  justify-content: flex-start; /* menú pegado a la izquierda */
+  align-items: stretch; /* que ocupe toda la altura */
+  z-index: 999; /* encima de todo */
+}
+
+.menu-modal {
+  background-color: #111; 
+  width: 40%;
+  height: 100vh;
+  padding: 1rem;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.7);
+  color: white;
+  overflow-y: auto;
+}
+
+.menu-modal .close {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.menu-modal nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu-modal nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.menu-modal nav a:hover {
+  text-decoration: underline;
+}

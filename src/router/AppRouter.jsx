@@ -10,6 +10,8 @@ import { CartView } from '../components/CartView/CartView'
 import { ItemProductContainer } from '../components/ItemProductContainer/ItemProductContainer'
 import { LoginScreen } from '../components/LoginScreen/LoginScreen'
 import { Footer } from '../components/Footer/Footer'
+import { RegisterScreen } from '../components/registerScreen/register'
+import { Ticker } from '../components/ticker/ticker'
 
 
 export const AppRouter = () => {
@@ -19,7 +21,7 @@ export const AppRouter = () => {
   return (
     <>
         <BrowserRouter>
-
+            <Ticker />
             <Navbar />
 
             {
@@ -41,6 +43,7 @@ export const AppRouter = () => {
             ) : ( <>
                 <Routes>
                     <Route path='/login' element={<LoginScreen />} />
+                    <Route path="/register" element={<RegisterScreen />} />
                     <Route path='*' element={<Navigate to='/login' />} />
                 </Routes>
                 </>

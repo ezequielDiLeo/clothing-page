@@ -8,40 +8,55 @@
     background-color: rgba(0,0,0,0.5);
 
     .login-form{
-        padding: 10px;
-        .login-btn{
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        .login-title {
             display: flex;
             justify-content: center;
-            text-align: center;
             align-items: center;
-            width: 90%;
-            height: 25px;
-            font-size: small;
-            font-weight: lighter;
-            background-color: #000000;
+            width: 100%;
+            padding: 1.5rem;
         }
         .form-screen{
             display: flex;
             flex-direction: column;
+            gap: 0.5rem;
             .input-login{
-                border-bottom: 1px solid rgba(117, 109, 109, 0.089);
+                padding: 0.7rem 1rem;
+                border: 1px solid #ddd;
+                border-radius: 0.5rem;
+                font-size: 1rem;
+                transition: border-color 0.3s ease;
+                &:focus {
+                    border-color: #a27b5c;
+                    outline: none;
+                }
             }
             .input-login::placeholder{
                 font-size: 12px;
                 padding-left: 10px;
             }
-            .cont-btn-login{
+            .cont-btn-login {
                 display: flex;
-                .login-btn{
-                    display: flex;
-                    justify-content: center;
-                    text-align: center;
-                    align-items: center;
-                    width: 90%;
-                    height: 25px;
-                    font-size: small;
-                    font-weight: lighter;
-                    background-color: #000000;
+                flex-direction: column;
+                justify-content: center;
+                button {
+                    padding: 0.55rem;
+                    background-color: #a27b5c;
+                    color: white;
+                    border: none;
+                    border-radius: 0.5rem;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+    
+                    &:hover {
+                        background-color: #8a634c;
+                    }
                 }
             }
         }

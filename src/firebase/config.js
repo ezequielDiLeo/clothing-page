@@ -8,7 +8,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyAu4fGC3ty0WLeEwPVm7jynMMRgyy3pk_o",
   authDomain: "eze-s-clothes.firebaseapp.com",
   projectId: "eze-s-clothes",
-  storageBucket: "eze-s-clothes.appspot.com",
+  storageBucket: "eze-s-clothes.firebasestorage.app",
   messagingSenderId: "640072767380",
   appId: "1:640072767380:web:2a8d2c2020e02289532181"
 };

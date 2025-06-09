@@ -1,6 +1,6 @@
 
 import './CartView.scss'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { CartContext } from '../Cartwidget/CartContext'
 import { Button } from '../Button/Button'
 import { Link } from 'react-router-dom'

@@ -1,4 +1,3 @@
-import React from 'react'
 import './ItemListContainer.scss'
 import { ItemList } from '../itemList/ItemList'
 import { useProductos } from '../../hooks/useProductos'
@@ -7,7 +6,7 @@ import { useProductos } from '../../hooks/useProductos'
 
 
 export const ItemListContainer = () => {
-  const { productos, loading } = useProductos()
+  const { productos } = useProductos()
 
   return (
     <ItemList productos={productos}/>
