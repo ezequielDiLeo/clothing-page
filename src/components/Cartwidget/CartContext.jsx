@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useState } from 'react'
 
 import { createContext } from 'react'
@@ -42,4 +43,8 @@ export const CartProvider = ({ children }) => {
 
         </CartContext.Provider>
     )
+}
+
+CartProvider.propTypes = {
+    children: PropTypes.node.isRequired
 }

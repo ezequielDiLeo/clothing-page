@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import cartIcon from '../../assets/img/cart.svg'
 import { CartContext } from './CartContext'
 import { Link } from 'react-router-dom'
