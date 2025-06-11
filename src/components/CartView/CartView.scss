@@ -1,18 +1,26 @@
 .carrito{
-    padding-top: 90px;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
-    background: linear-gradient(rgba(75, 72, 55, 0.753), rgba(39, 36, 27, 0.966)), url(https://i.pinimg.com/550x/92/86/06/928606fec30812d4e985af876f18c389.jpg) no-repeat center center fixed;
+    background: white;
+    width: 100%;
     background-size: cover;
     object-fit: cover;
+    color: black;
 
     .btn-car{
-        align-items: center;
-        width: auto;
-        height: auto;
-        font-size: 12px;
-        background-color: rgb(18, 72, 88);
-        margin-bottom: 50px;
+        background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.05)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(55px);
+        color: rgb(0, 0, 0);
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
 }

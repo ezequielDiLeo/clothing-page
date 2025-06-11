@@ -20,6 +20,7 @@
             align-items: center;
             width: 100%;
             padding: 1.5rem;
+            font-weight: bold;
         }
         .form-screen{
             display: flex;
@@ -35,10 +36,6 @@
                     border-color: #a27b5c;
                     outline: none;
                 }
-            }
-            .input-login::placeholder{
-                font-size: 12px;
-                padding-left: 10px;
             }
             .cont-btn-login {
                 display: flex;

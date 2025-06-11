@@ -1,6 +1,6 @@
 import './Navbar.scss'
 import { useContext, useEffect, useState } from 'react'
-import logo from '../../assets/img/logoTienda.jpg'
+import logo from '../../assets/img//iconoPn.png'
 import { Cartwidget } from '../Cartwidget/Cartwidget'
 import { Link, NavLink } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext/UserContext'
@@ -10,27 +10,23 @@ import salir from '../../assets/img/cerrar-sesion.png'
 /*......LINKS.....*/ 
 const links = [
   {
-    label: "Home",
-    href: "/",
-  },
-  {
     label: "Remeras",
     href:"/items/remeras",
   },
   {
-    label: "pantalones",
+    label: "Pantalones",
     href: "/items/pantalones",
   },
   {
-    label: "camisas",
+    label: "Camisas",
     href: "/items/camisas",
   },
   {
-    label: "lentes",
+    label: "Lentes",
     href: "/items/lentes",
   },
   {
-    label: "zapatillas",
+    label: "Zapatillas",
     href: "/items/zapatillas",
   },
 ]
@@ -76,9 +72,12 @@ export const Navbar = () => {
               <div className='modal-loyout' onClick={() => setMenuOpen(false)}>
                 <div className="menu-modal open" onClick={(e) => e.stopPropagation()}>
                   <button className="close" onClick={() => setMenuOpen(false)}>✕</button>
+                  <div className='cont-img-logo'>
+                    <img className='imagen-logo' src={logo}/>
+                  </div>
                   <nav className="modal-nav">
                     {links.map(link => (
-                      <NavLink key={link.href} to={link.href} onClick={() => setMenuOpen(false)}>
+                      <NavLink className='hamburguer-link' key={link.href} to={link.href} onClick={() => setMenuOpen(false)}>
                         {link.label}
                       </NavLink>
                     ))}
@@ -113,7 +112,6 @@ export const Navbar = () => {
         )}
 
         <div className='actions'>
-          <Cartwidget />
           {user.logged && !scrolled && (
             <div className='logOut-cont'>
               <Button variant='white' onClick={logOut} className='btn-logOut text-xs '>
@@ -122,6 +120,7 @@ export const Navbar = () => {
               <p className='text-black user'>{user.email}</p>
             </div>
           )}
+          <Cartwidget />
         </div>
 
       </div>

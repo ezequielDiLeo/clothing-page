@@ -27,14 +27,16 @@ export const RegisterScreen = () => {
   return (
     <div className='register-container'>
         <div className='register-form rounded'>
-             <h2>Registrarse</h2>
-                <form onSubmit={handleSubmit}>
+             <h2 className='login-title font-bolder'>Registrarse</h2>
+             <hr />
+                <form onSubmit={handleSubmit} className='form-screen'>
                     <input 
                         type="email" 
                         name="email" 
                         placeholder="Email"
                         onChange={handleInputChange}
                         value={values.email}
+                        className='input-login m-2' 
                     />
                     <input 
                         type="password" 
@@ -42,6 +44,7 @@ export const RegisterScreen = () => {
                         placeholder="Password"
                         onChange={handleInputChange}
                         value={values.password}
+                        className='input-login m-2' 
                     />
                     <Button type="submit">Crear cuenta</Button>
                     <Button onClick={() => Navigate('/login')}>Volver al login</Button>

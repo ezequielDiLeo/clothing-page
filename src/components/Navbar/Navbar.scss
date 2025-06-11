@@ -5,16 +5,95 @@
   z-index: 50;
   background-color: white;
   transition: all 0.3s ease;
+  font-family: "Playfair Display", serif;
 
   .header_container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
     height: 70px;
+    margin: 0 2rem;
     position: relative;
+
+    .hamburger {
+      position: absolute;
+      left: 1rem;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 99;
+      order: 1;
+    }
+    .modal-loyout {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: flex-start;
+      align-items: stretch;
+      z-index: 999;
+    }
+
+    .menu-modal {
+      background-color: #111; 
+      width: 30%;
+      height: 100vh;
+      padding: 1rem;
+      padding-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.7);
+      color: white;
+      overflow-y: auto;
+      .cont-img-logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        .imagen-logo {
+          height: 70px;
+        }
+      }
+    }
+
+    .menu-modal .close {
+      align-self: flex-end;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+
+    .menu-modal nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      .hamburguer-link{
+        padding-top: 10px;
+        border-bottom: 1px solid white;
+      }
+    }
+
+    .menu-modal nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .menu-modal nav a:hover {
+      transform: scale(1.01);
+      color: #c5b7b7;
+    }
   }
 
   .cont-img {
@@ -44,7 +123,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-left: 15px;
+      margin-right: 10px;
       .user {
         font-size: 12px;
       }
@@ -73,73 +152,9 @@
         background-color: white;
       }
     }
-    .hamburger {
-      position: absolute;
-      left: 1rem;
-      font-size: 1.5rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 99;
-      order: 1;
-    }
 
     .navbar {
       display: none;
     }
   }
-}
-
-.modal-loyout {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.7); /* fondo negro semi-transparente */
-  display: flex;
-  justify-content: flex-start; /* menú pegado a la izquierda */
-  align-items: stretch; /* que ocupe toda la altura */
-  z-index: 999; /* encima de todo */
-}
-
-.menu-modal {
-  background-color: #111; 
-  width: 40%;
-  height: 100vh;
-  padding: 1rem;
-  padding-left: 2rem;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.7);
-  color: white;
-  overflow-y: auto;
-}
-
-.menu-modal .close {
-  align-self: flex-end;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  margin-bottom: 1rem;
-}
-
-.menu-modal nav {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.menu-modal nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.menu-modal nav a:hover {
-  text-decoration: underline;
 }

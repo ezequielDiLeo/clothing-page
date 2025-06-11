@@ -1,0 +1,28 @@
+.modal-loyout {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 40;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+}
+
+.menu-modal-cart.open {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: rgb(255, 255, 255);
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5); // sombra opcional
+  z-index: 50;               // asegúrate que esté sobre el overlay
+  transition: transform 0.3s ease-in-out; // animación opcional
+  .close {
+      color: black;
+  }
+}
+

@@ -12,6 +12,8 @@ import { LoginScreen } from '../components/LoginScreen/LoginScreen'
 import { Footer } from '../components/Footer/Footer'
 import { RegisterScreen } from '../components/registerScreen/register'
 import { Ticker } from '../components/ticker/ticker'
+import { ScrollToTop } from '../components/scrollToTop/scrollToTop';
+
 
 
 export const AppRouter = () => {
@@ -20,7 +22,9 @@ export const AppRouter = () => {
 
   return (
     <>
+         
         <BrowserRouter>
+        <ScrollToTop />
             <Ticker />
             <Navbar />
 

@@ -4,28 +4,18 @@ import { Button } from '../Button/Button'
 import './ItemDetail.scss'
 import { QuantitySelector } from './QuantitySelector'
 import { CartContext } from '../Cartwidget/CartContext'
-import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types';
+import ProductDetails from '../medidas/medidas'
 
 
 export const ItemDetail = ({item}) => {
 
-      ItemDetail.propTypes = {
-        item: PropTypes.arrayOf(
-          PropTypes.shape({
-            id: PropTypes.any.isRequired,
-            name: PropTypes.string.isRequired,
-            price: PropTypes.number.isRequired,
-            img: PropTypes.string.isRequired,
-            category: PropTypes.string.isRequired,
-          })
-        ).isRequired,
-      };
-
   const navigate = useNavigate()
   const[cantidad, setCantidad]= useState(0)
-  const { addToCart, isInCart } = useContext(CartContext)
+  const { addToCart, isInCart } = useContext(CartContext);
+  const [selectedImg, setSelectedImg] = useState(item.img);
+
 
 
   const handleAgregar = () => {
@@ -49,40 +39,54 @@ export const ItemDetail = ({item}) => {
             <hr />
             <div className='contenedor-all'>
               <div className='car-img'>
-                <img loading="lazy" src={item.img} alt={item.name} />
-                <img loading="lazy" src={item.img} alt={item.name} />
-                <img loading="lazy" src={item.img} alt={item.name} />
-                <img loading="lazy" src={item.img} alt={item.name} />
+                {[item.img, item.img2, item.img3, item.img4].map((img, index) => (
+                  img && (
+                    <img
+                      key={index}
+                      src={img}
+                      alt={`miniatura-${index}`}
+                      className='miniatura'
+                      onClick={() => setSelectedImg(img)}
+                    />
+                  )
+                ))}
               </div>
               <div className="cont-img">
-                <img loading="lazy" src={item.img} alt={item.name} className='img' />
+                <img loading="lazy" src={selectedImg} alt={item.name} className='img' />
               </div>
               <div className='desc'>
                 <h1 className='title-desc'>{item.name}</h1>
-                <p className='descripcion' >{item.description}</p>
+                <hr></hr>
                 <p className='price'>${item.price}</p>
+                <p className='descripcion' >{item.description}</p>
                 {
                   isInCart( item.id )
                   ? <> 
                       <div className='cont-fn font-light text-xs'>
-                        <Link to="/cart"><Button className='btn-fn'>terminar compra</Button></Link>
+                        <p className='text-lg agregado'>Producto agregado correctamente</p>
                       </div>  
                     </>
                   : <>
+                      <div className='cont-agregar-cant'>
                         <QuantitySelector
-                        cantidad = {cantidad}
-                        stock = {item.stock}
-                        setCantidad={setCantidad}
-                      />
-                        <div className='cont-agregar'>
-                          <Button className='btn-agregar font-light' onClick={handleAgregar} >
-                            agregar al carrito
-                          </Button>
-                        </div>
+                          cantidad = {cantidad}
+                          stock = {item.stock}
+                          setCantidad={setCantidad}
+                          className='cant-select'
+                        />
+                        {
+                          cantidad > 0 &&
+                          <div className='cont-agregar'>
+                            <Button className='btn-agregar' onClick={handleAgregar} >
+                              agregar al carrito
+                            </Button>
+                          </div>
+                        }
+                      </div>
                     </>
                 }
                 <div>
-                <p className='text-black p-5 text-xs'>{item.caract}</p>
+                <p className='text-black caract'>{item.caract}</p>
                 </div>
               </div>
               
@@ -90,9 +94,25 @@ export const ItemDetail = ({item}) => {
             <div className="mas-prod">
               <p className='text-black p-5 text-m font-light'>envios a todo el pais 🌐</p>
             </div>
+        <div>
+          <ProductDetails product={{descripcion: item.description}} />
+        </div>
         </article>
+
     </div>
   )
 }
 
 
+      ItemDetail.propTypes = {
+        item: PropTypes.arrayOf(
+          PropTypes.shape({
+            id: PropTypes.any.isRequired,
+            name: PropTypes.string.isRequired,
+            price: PropTypes.number.isRequired,
+            img: PropTypes.string.isRequired,
+            category: PropTypes.string.isRequired,
+            product: PropTypes.string.isRequired
+          })
+        ).isRequired,
+      };
