@@ -13,6 +13,10 @@ import { Footer } from '../components/Footer/Footer'
 import { RegisterScreen } from '../components/registerScreen/register'
 import { Ticker } from '../components/ticker/ticker'
 import { ScrollToTop } from '../components/scrollToTop/scrollToTop';
+import { Help } from '../components/ayuda/ayuda'
+import { Faq } from '../components/faq/faq'
+import { Devoluciones } from '../components/devoluciones/devoluciones'
+import { Envios } from '../components/envios/envios'
 
 
 
@@ -38,6 +42,10 @@ export const AppRouter = () => {
                     <Route path='/cart' element={<CartView/>} />
                     <Route path='/productos/:categoryName' element={ <ItemListContainer /> }/>
                     <Route path='/items/:categoryId' element= { <ItemProductContainer /> } />
+                    <Route path="/ayuda" element={<Help />} />
+                    <Route path="/faq" element={<Faq />} />
+                    <Route path='/devoluciones' element={<Devoluciones />} />
+                    <Route path='/envios' element={<Envios />} />
                     
                     <Route path='*' element= {<Navigate to="/" /> } />
                 </Routes>

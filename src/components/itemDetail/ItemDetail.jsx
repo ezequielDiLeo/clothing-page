@@ -2,7 +2,6 @@
 import { useContext, useState } from 'react'
 import { Button } from '../Button/Button'
 import './ItemDetail.scss'
-import { QuantitySelector } from './QuantitySelector'
 import { CartContext } from '../Cartwidget/CartContext'
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types';
@@ -12,20 +11,26 @@ import ProductDetails from '../medidas/medidas'
 export const ItemDetail = ({item}) => {
 
   const navigate = useNavigate()
-  const[cantidad, setCantidad]= useState(0)
-  const { addToCart, isInCart } = useContext(CartContext);
+  const { addToCart, cart } = useContext(CartContext);
   const [selectedImg, setSelectedImg] = useState(item.img);
 
 
 
-  const handleAgregar = () => {
-    const itemToCart = {
-      ...item,
-      cantidad,
-    }
+const handleAgregar = () => {
+  const itemInCart = cart.find(i => i.id === item.id);
+  if (itemInCart && itemInCart.cantidad >= item.stock) {
+    // Mostrar alerta o mensaje de stock máximo alcanzado
+    alert('No hay más stock disponible');
+    return;
+  }
+  
+  const itemToCart = {
+    ...item,
+    cantidad: 1,
+  };
+  addToCart(itemToCart);
+};
 
-    addToCart(itemToCart)
-  } 
 
   const handleVolver = () => {
     navigate(-1)
@@ -34,7 +39,7 @@ export const ItemDetail = ({item}) => {
 
   return (
     <div className='detail_container'>
-        <article key={item.id} className='justify-center'>
+        <article key={item.id} className='justify-center article'>
             <Button className='btn-volver' onClick={handleVolver}>Volver</Button>
             <hr />
             <div className='contenedor-all'>
@@ -45,7 +50,7 @@ export const ItemDetail = ({item}) => {
                       key={index}
                       src={img}
                       alt={`miniatura-${index}`}
-                      className='miniatura'
+                      className={`miniatura ${selectedImg === img ? 'active' : ''}`}
                       onClick={() => setSelectedImg(img)}
                     />
                   )
@@ -59,36 +64,17 @@ export const ItemDetail = ({item}) => {
                 <hr></hr>
                 <p className='price'>${item.price}</p>
                 <p className='descripcion' >{item.description}</p>
-                {
-                  isInCart( item.id )
-                  ? <> 
-                      <div className='cont-fn font-light text-xs'>
-                        <p className='text-lg agregado'>Producto agregado correctamente</p>
-                      </div>  
-                    </>
-                  : <>
-                      <div className='cont-agregar-cant'>
-                        <QuantitySelector
-                          cantidad = {cantidad}
-                          stock = {item.stock}
-                          setCantidad={setCantidad}
-                          className='cant-select'
-                        />
-                        {
-                          cantidad > 0 &&
-                          <div className='cont-agregar'>
-                            <Button className='btn-agregar' onClick={handleAgregar} >
-                              agregar al carrito
-                            </Button>
-                          </div>
-                        }
-                      </div>
-                    </>
-                }
-                <div>
+                <div className='cont-agregar-cant'>
+                    <div className='cont-agregar'>
+                    <Button className='btn-agregar' onClick={handleAgregar} >
+                      Agregar al carrito
+                    </Button>
+                    </div>
+                    </div>
+              <div>
                 <p className='text-black caract'>{item.caract}</p>
-                </div>
               </div>
+            </div>
               
             </div>
             <div className="mas-prod">
@@ -104,15 +90,18 @@ export const ItemDetail = ({item}) => {
 }
 
 
-      ItemDetail.propTypes = {
-        item: PropTypes.arrayOf(
-          PropTypes.shape({
-            id: PropTypes.any.isRequired,
-            name: PropTypes.string.isRequired,
-            price: PropTypes.number.isRequired,
-            img: PropTypes.string.isRequired,
-            category: PropTypes.string.isRequired,
-            product: PropTypes.string.isRequired
-          })
-        ).isRequired,
-      };
+ItemDetail.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.any.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    img2: PropTypes.string,
+    img3: PropTypes.string,
+    img4: PropTypes.string,
+    description: PropTypes.string,
+    stock: PropTypes.number,
+    caract: PropTypes.string,
+  }).isRequired,
+};

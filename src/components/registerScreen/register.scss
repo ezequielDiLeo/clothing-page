@@ -70,4 +70,30 @@
       }
     }
   }
+
+      .password-wrapper {
+        position: relative;
+
+        .input-login {
+            width: 100%;
+            padding-right: 2.5rem; // espacio para el ícono
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #555;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+  }
+      .error-text {
+        color: red;
+        font-size: 0.85rem;
+        margin: 0 0 0.5rem 0.5rem;
+    }   
 }

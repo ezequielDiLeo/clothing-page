@@ -15,7 +15,7 @@ import {
 import Swal from 'sweetalert2';
 
 export const Checkout = () => {
-  const { cart, totalCart, clearCart } = useContext(CartContext);
+  const { cart, totalCart, clearCart, increaseQty, decreaseQty } = useContext(CartContext);
 
   const [values, setValues] = useState({
     Nombre: '',
@@ -104,6 +104,32 @@ export const Checkout = () => {
     <div className="cont-checkout">
       <h2 className="datos">Ingresá tus datos para finalizar la compra</h2>
       <hr />
+
+      {/* RESUMEN DEL CARRITO CON BOTONES + Y - */}
+      {cart.length > 0 && (
+        <div className="resumen-carrito">
+          <h3 className="subtitle">Resumen del carrito:</h3>
+          <ul>
+            {cart.map((item) => (
+              <li key={item.id} className="item-checkout">
+                <div className="info-item">
+                  <p>{item.name}</p>
+                  <div className="qty-controls">
+                    <button type="button" onClick={() => decreaseQty(item.id)}>-</button>
+                    <span>{item.cantidad}</span>
+                    <button type="button" onClick={() => increaseQty(item.id)}>+</button>
+                  </div>
+                  <p>Subtotal: ${item.price * item.cantidad}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="total">Total: ${totalCart()}</p>
+          <hr />
+        </div>
+      )}
+
+      {/* FORMULARIO */}
       <form onSubmit={handleSubmit} className="formu">
         <input
           className="input"
@@ -132,14 +158,6 @@ export const Checkout = () => {
           onChange={handleInputChange}
           required
         />
-        {/* <input
-          className="input"
-          name="Doc"
-          type="text"
-          placeholder="DNI"
-          value={values.Doc}
-          onChange={handleInputChange}
-        /> */}
         <div className="cont-form">
           <Button type="submit" className="btn-form">Enviar</Button>
         </div>

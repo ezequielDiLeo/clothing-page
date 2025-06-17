@@ -9,9 +9,42 @@ export const CartProvider = ({ children }) => {
 
     const [cart, setCart] = useState([])
 
-    const addToCart = (item) => {
-        setCart([...cart, item])
-    }
+    const addToCart = (itemToCart) => {
+        setCart((prevCart) => {
+            const existingItem = prevCart.find((item) => item.id === itemToCart.id);
+            if (existingItem) {
+            return prevCart.map((item) =>
+                item.id === itemToCart.id
+                ? { ...item, cantidad: item.cantidad + 1 }
+                : item
+            );
+            } else {
+            return [...prevCart, itemToCart];
+            }
+        });
+    };
+    const increaseQty = (productId) => {
+        setCart((prevCart) =>
+            prevCart.map((item) =>
+            item.id === productId
+                ? { ...item, cantidad: item.cantidad + 1 }
+                : item
+            )
+        );
+    };
+
+    const decreaseQty = (productId) => {
+    setCart((prevCart) =>
+        prevCart
+        .map((item) =>
+            item.id === productId
+            ? { ...item, cantidad: item.cantidad - 1 }
+            : item
+        )
+        .filter((item) => item.cantidad > 0) 
+    );
+    };
+
 
     const isInCart = (id) => {
         return cart.some(item => item.id ===id)
@@ -36,7 +69,9 @@ export const CartProvider = ({ children }) => {
             isInCart,
             clearCart,
             itemInCart,
-            totalCart
+            totalCart,
+            increaseQty,
+            decreaseQty,
         }}>
 
         {children}

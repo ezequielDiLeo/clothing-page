@@ -12,7 +12,7 @@ import { useMotionValue, animate } from "framer-motion";
 import PropTypes from 'prop-types';
 import byn from '../../assets/img/ropaByN.jpg';
 import modelo1 from '../../assets/img/modelo1-.jpg';
-import modelo2 from '../../assets/img/modelosSale.jpg';
+import modelo2 from '../../assets/img/modelos2.jpg';
 import modelo3 from '../../assets/img/modelos3.jpg';
 import 'swiper/css'
 import 'swiper/css/autoplay'
@@ -25,6 +25,12 @@ export const ItemList = ({ productos }) => {
   const x = useMotionValue(0);
   const loopedProductos = [...productos, ...productos, ...productos];
   const scrollAmount = 300;
+
+  const productosDestacados = productos
+  .filter(
+    (p) => p.season === 'invierno'
+  )
+  .slice(0, 4);
 
   const imagenes = [
     { src: modelo1, alt: 'modelo1', className: 'modelos1', },
@@ -110,44 +116,62 @@ export const ItemList = ({ productos }) => {
       </p>
         <hr />
         <section className='slider-wrapper'>
-        <button
-          className='left-arrow'
-          onClick={() => {
-            scrollLeft();
-          }}
-          >
-          <ChevronLeft size={32} />
-        </button>
-        <motion.div className='slider-container' ref={sliderRef}>
-              <motion.div
-                className='slider'
-                style={{ x }}
-                drag='x'
-                dragElastic={0.2}
-              >
-                {loopedProductos.map((item) => (
-                  <article key={item.id} className='item-card'>
-                    <div className='item'>
-                      <img src={item.img} alt={item.name} loading="lazy" />
-                    </div>
-                    <h3 className='text-2xl pt-4 text-center'>{item.name}</h3>
-                    <p className='font-semibold text-center'>${item.price}</p>
-                    <Link to={`/items/${item.category}`}>
-                      <Button className='btn-mas'>ver más</Button>
-                    </Link>
-                  </article>
-                ))}
-              </motion.div>
-        </motion.div>
-        <button
-          className='right-arrow'
-          onClick={() => {
-            scrollRight();
+          <button
+            className='left-arrow'
+            onClick={() => {
+              scrollLeft();
             }}
-          >
-          <ChevronRight size={32} />
-        </button>
-      </section>
+            >
+            <ChevronLeft size={32} />
+          </button>
+          <motion.div className='slider-container' ref={sliderRef}>
+                <motion.div
+                  className='slider'
+                  style={{ x }}
+                  drag='x'
+                  dragElastic={0.2}
+                >
+                  {loopedProductos.map((item) => (
+                    <article key={item.id} className='item-card'>
+                      <div className='item'>
+                        <img src={item.img} alt={item.name} loading="lazy" />
+                      </div>
+                      <h3 className='title-card'>{item.name}</h3>
+                      <p className='price'>${item.price}</p>
+                      <Link to={`/item/${item.id}`}>
+                        <Button className='btn-mas'>ver más</Button>
+                      </Link>
+                    </article>
+                  ))}
+                </motion.div>
+          </motion.div>
+          <button
+            className='right-arrow'
+            onClick={() => {
+              scrollRight();
+              }}
+            >
+            <ChevronRight size={32} />
+          </button>
+        </section>
+
+        <section className='destacados'>
+          <p className='collection-title'>Especial Invierno ❄️</p>
+          <div className='grid-destacados'>
+            {productosDestacados.map((item) => (
+              <article key={item.id} className='item-card'>
+                <div className='item'>
+                  <img src={item.img} alt={item.name} loading="lazy" />
+                </div>
+                <h3 className='text-xl pt-2 text-center'>{item.name}</h3>
+                <p className='font-semibold text-center'>${item.price}</p>
+                <Link to={`/item/${item.id}`}>
+                  <Button className='btn-mas'>ver más</Button>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
 
         <div className='cont-form'>
           <Form />

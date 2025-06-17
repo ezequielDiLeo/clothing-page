@@ -1,0 +1,62 @@
+.help-container {
+  max-width: 800px;
+  margin: 3rem auto;
+  margin-top: 0;
+  padding: 2rem;
+  padding-top: 150px;
+  background-color: #fefefe;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  font-family: 'Playfair Display', serif;
+  color: #222;
+  line-height: 1.7;
+  
+  h1 {
+    font-size: 2.4rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .intro {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2.5rem;
+  }
+
+  .help-section {
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 1.3rem;
+      color: #181818;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #555;
+    }
+  }
+
+  .contact-info {
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0;
+
+    li {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+

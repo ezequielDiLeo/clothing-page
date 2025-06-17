@@ -8,13 +8,15 @@
   font-family: 'Inter', sans-serif;
   gap: 2rem;
   flex-wrap: wrap;
+  margin: 0;
 
   &__item {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    flex: 1;
+    flex: 1 1 30%;
+    text-align: center;
   }
 
   &__icon {
@@ -36,5 +38,58 @@
 
   span {
     margin-left: 4px;
+  }
+
+  // Responsive tablets
+  @media (max-width: 992px) {
+    padding: 1.5rem 2rem;
+
+    &__item {
+      flex: 1 1 45%;
+    }
+
+    &__icon {
+      font-size: 1.8rem;
+    }
+
+    &__title {
+      font-size: 0.95rem;
+    }
+
+    &__desc {
+      font-size: 0.9rem;
+    }
+  }
+
+  // Responsive mobile
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+
+    .benefits__title {
+      font-size: 13px;
+    }
+    .benefits__desc {
+      font-size: 12px;
+    }
+
+    &__item {
+      flex: 1 1 100%;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    &__icon {
+      font-size: 1.4rem;
+    }
+
+    &__title {
+      font-size: 0.9rem;
+    }
+
+    &__desc {
+      font-size: 0.85rem;
+    }
   }
 }

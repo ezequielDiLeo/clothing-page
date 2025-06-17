@@ -2,6 +2,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './footer.scss'
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
 
@@ -28,8 +29,8 @@ export const Footer = () => {
         <div className="footer__section">
           <h4 className="footer__title">Ayuda</h4>
           <ul>
-            <li><a href="#">Envíos</a></li>
-            <li><a href="#">Devoluciones</a></li>
+            <li><Link to="/envios">Envíos</Link></li>
+            <li><Link to="/devoluciones">Devoluciones</Link></li>
           </ul>
         </div>
 
