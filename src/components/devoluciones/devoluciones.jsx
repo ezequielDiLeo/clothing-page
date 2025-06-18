@@ -1,4 +1,4 @@
-import './Devoluciones.scss';
+import './devoluciones.scss';
 
 export const Devoluciones = () => {
   return (
