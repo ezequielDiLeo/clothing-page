@@ -2,16 +2,17 @@ import './register.scss'
 import { useContext, useState } from "react"
 import { UserContext } from "../../context/UserContext/UserContext"
 import { Button } from "../Button/Button";
-import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react';
+// import { useNavigate } from 'react-router-dom';
+import { Eye, EyeOff, X } from 'lucide-react';
 import * as Yup from 'yup';
+import PropTypes from 'prop-types';
 
-export const RegisterScreen = () => {
+export const RegisterScreen = ({ onClose, onSwitch }) => {
  
     const { register } = useContext(UserContext);
     const [values, setValues] = useState({email: '', password: ''});
     const [ showPassword, setShowPassword] = useState(false)
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [errors, setErrors] = useState({});
         
     const loginSchema = Yup.object().shape({
@@ -39,6 +40,7 @@ export const RegisterScreen = () => {
             register(values);
             setValues({email: '', password: ''});
             setErrors({});
+            onClose();
         } catch (err) {
             const validationErrors = {};
             err.inner.forEach(error => {
@@ -52,6 +54,7 @@ export const RegisterScreen = () => {
   return (
     <div className='register-container'>
         <div className='register-form rounded'>
+            <button className="close-button" onClick={onClose}><X size={20} /></button>
              <h2 className='login-title font-bolder'>Registrarse</h2>
              <hr />
                 <form onSubmit={handleSubmit} className='form-screen'>
@@ -82,9 +85,14 @@ export const RegisterScreen = () => {
                         </span>
                     </div>
                     <Button type="submit">Crear cuenta</Button>
-                    <Button onClick={() => navigate ('/login')}>Volver al login</Button>
+                    <Button onClick={onSwitch}>Volver al login</Button>
                 </form>
         </div>
     </div>
   )
 }
+
+RegisterScreen.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    onSwitch: PropTypes.func.isRequired,
+};

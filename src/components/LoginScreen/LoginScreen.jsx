@@ -1,15 +1,15 @@
 
 import './LoginScreen.scss'
+import PropTypes from 'prop-types';
 import { Button } from '../Button/Button'
 import { useContext, useState } from 'react'
 import * as Yup from "yup"
 import { UserContext } from '../../context/UserContext/UserContext'
-import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, X } from 'lucide-react'
+import Swal from 'sweetalert2';
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ onClose, onSwitch }) => {
     const { login } = useContext(UserContext)
-    const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false);
     const [errors, setErrors] = useState({});
 
@@ -43,6 +43,15 @@ export const LoginScreen = () => {
         try {
             await loginSchema.validate(values, { abortEarly: false });
             login(values);
+
+            Swal.fire({
+                title: '¡Bienvenido!',
+                text: 'Inicio de sesión exitoso.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+            
+            onClose();
         } catch (err) {
             const validationErrors = {};
             err.inner.forEach(error => {
@@ -55,6 +64,7 @@ export const LoginScreen = () => {
   return (
     <div className='login-container'>
         <div className='login-form rounded bg-white'>
+            <button className="close-button" onClick={onClose}><X size={20} /></button>
             <h2 className='login-title font-bolder'>Login</h2>
             <hr />
             <form onSubmit={handleSubmit} className='form-screen'>
@@ -86,10 +96,16 @@ export const LoginScreen = () => {
                 </div>
                 <div className='cont-btn-login'>
                     <Button type='submit'>Ingresar</Button>
-                    <Button onClick={() => navigate('/register')}>Registrarse</Button>      
+                    <Button onClick={onSwitch}>Registrarse</Button>      
                 </div>
             </form>
         </div>
     </div>
   )
 }
+
+
+LoginScreen.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    onSwitch: PropTypes.func.isRequired,
+};

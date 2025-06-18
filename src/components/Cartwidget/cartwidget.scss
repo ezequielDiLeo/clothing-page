@@ -6,6 +6,7 @@
   width: 100vw;
   height: 100vh;
   background: rgba(0,0,0,0.5);
+  font-family: 'Inter', sans-serif;
 }
 
 .menu-modal-cart.open {
@@ -18,11 +19,18 @@
   width: 100%;
   max-width: 500px;
   padding: 1rem;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5); // sombra opcional
-  z-index: 50;               // asegúrate que esté sobre el overlay
-  transition: transform 0.3s ease-in-out; // animación opcional
-  .close {
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5); 
+  z-index: 50; 
+  transition: transform 0.3s ease-in-out; 
+  .close-component {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    .close {
+      font-size: 20px;
       color: black;
+      padding: 10px;
+    }
   }
 }
 

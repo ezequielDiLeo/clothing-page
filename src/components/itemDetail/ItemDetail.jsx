@@ -65,12 +65,12 @@ const handleAgregar = () => {
                 <p className='price'>${item.price}</p>
                 <p className='descripcion' >{item.description}</p>
                 <div className='cont-agregar-cant'>
-                    <div className='cont-agregar'>
+                  <div className='cont-agregar'>
                     <Button className='btn-agregar' onClick={handleAgregar} >
                       Agregar al carrito
                     </Button>
-                    </div>
-                    </div>
+                  </div>
+                </div>
               <div>
                 <p className='text-black caract'>{item.caract}</p>
               </div>

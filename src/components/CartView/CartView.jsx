@@ -3,24 +3,38 @@ import './CartView.scss'
 import { useContext } from 'react'
 import { CartContext } from '../Cartwidget/CartContext'
 import { Button } from '../Button/Button'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
-export const CartView = () => {
+export const CartView = ({ onClose }) => {
 
-    const { cart, totalCart, clearCart } = useContext(CartContext)
+    const { cart, totalCart, clearCart } = useContext(CartContext);
+    const navigate = useNavigate();
+    
+    const handleGoToShop = () => {
+        if (onClose) onClose();
+        navigate('/home');
+    };
+
+    const handleGoToCheckout = () => {
+        if (onClose) onClose();
+        navigate('/checkout');
+    };
+
 
     if (cart.length === 0){
         return(
             <section className='carrito m-0 p-5 gap-2'>
             <div className='p-3 text-center h-full'>
-                <h2 className=' text-xl text-black p-3'><code>No has agregado productos al carrito</code></h2>
+                <h2 className=' text-xl text-black p-5'>No has agregado productos al carrito</h2>
                 <hr />
                 <p className='p-3 text-black'>Vuelve al Inicio para agregar algún producto</p>
-                <Button className='btn-car' onClick={() => window.location.reload()}>Ir a comprar</Button>
+                <Button className='btn-car' onClick={handleGoToShop}>Ir a comprar</Button>
             </div>
         </section>
         );
     }
+      
 
   return (
     <section className='carrito m-15 p-5 gap-2 '>
@@ -46,8 +60,12 @@ export const CartView = () => {
                 <div className='text-center'>
                     <h4 className='text-light font-normal text-black'>Total: ${totalCart()}</h4>
                     <Button className='btn-car' onClick={clearCart}>Vaciar carrito</Button>
-                    <Button className='btn-car'><Link to={'/checkout'}>Ir a Pagar</Link></Button>
+                    <Button className='btn-car' onClick={handleGoToCheckout}>Ir a Pagar</Button>
                 </div>
     </section>
   )
 }
+
+CartView.propTypes = {
+  onClose: PropTypes.func.isRequired, 
+};
