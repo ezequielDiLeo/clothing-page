@@ -93,7 +93,7 @@ export const Navbar = () => {
                 <div className="menu-modal open" onClick={(e) => e.stopPropagation()}>
                     <div className="flex justify-between items-center mb-4">
 
-                      <button className="text-2xl font-bold" onClick={() => setMenuOpen(false)}>✕</button>
+                      <button className="text-2xl font-bold equis" onClick={() => setMenuOpen(false)}>✕</button>
 
                       <div className='logOut-cont' onClick={logOut}>
                         <Button variant='white' onClick={logOut} className='btn-logOut text-xs '>
@@ -167,7 +167,7 @@ export const Navbar = () => {
               </div>
             </div>
 
-          <div className='actions flex items-center justify-center '>
+          <div className='actions'>
             {user.logged ? (
               <div className='logOut-cont logout'>
                 <Button variant='white' onClick={logOut} className='btn-logOut text-xs '>

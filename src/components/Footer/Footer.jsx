@@ -38,7 +38,7 @@ export const Footer = () => {
           <h4 className="footer__title">Contacto</h4>
           <ul>
             <li><i className="fa-solid fa-phone"></i> +54 11 1234-5678</li>
-            <li><i className="fa-solid fa-envelope"></i> contacto@tienda.com</li>
+            <li><a href='mailto:ezemr1996@gmail.com'><i className="fa-solid fa-envelope"></i> ezemr1996@gmail.com</a></li>
             <li><i className="fa-solid fa-location-dot"></i> Buenos Aires, Argentina</li>
           </ul>
         </div>
@@ -46,9 +46,9 @@ export const Footer = () => {
         <div className="footer__social">
           <h4 className="footer__title">Seguinos</h4>
           <div className="footer__icons">
-            <a href="#"><i className="fa-brands fa-instagram"></i></a>
-            <a href="#"><i className="fa-brands fa-facebook-f"></i></a>
-            <a href="#"><i className="fa-brands fa-whatsapp"></i></a>
+            <a href="facebook.com"><i className="fa-brands fa-facebook-f"></i></a>
+            <a href="mailto:ezemr1996@gmail.com"><i className="fa-solid fa-envelope"></i></a>
+            <a href="linkedin"><i className="fa-brands fa-whatsapp"></i></a>
           </div>
         </div>
       </div>

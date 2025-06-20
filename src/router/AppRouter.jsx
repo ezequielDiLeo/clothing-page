@@ -4,7 +4,6 @@ import { Navbar } from '../components/Navbar/Navbar'
 import { ItemListContainer } from '../components/ItemListContainer/ItemListContainer'
 import { Checkout } from '../components/Checkout/Checkout'
 import { ItemDetailContainer } from '../components/ItemDetailContainer/ItemDetailContainer'
-import { CartView } from '../components/CartView/CartView'
 import { ItemProductContainer } from '../components/ItemProductContainer/ItemProductContainer'
 import { Footer } from '../components/Footer/Footer'
 import { Ticker } from '../components/ticker/ticker'
@@ -39,7 +38,7 @@ export const AppRouter = () => {
               <Route path='/item/:itemId' element={<ItemDetailContainer />} />
               <Route path='/productos/:categoryName' element={<ItemListContainer />} />
               <Route path='/items/:categoryId' element={<ItemProductContainer />} />
-              <Route path='/cart' element={<CartView />} />
+              {/* <Route path='/cart' element={<CartView />} /> */}
               <Route path="/ayuda" element={<Help />} />
               <Route path="/faq" element={<Faq />} />
               <Route path='/devoluciones' element={<Devoluciones />} />

@@ -95,5 +95,9 @@
     &__icons {
       justify-content: center;
     }
+
+    &__section {
+    flex: 1 1 100px;
+    }
   }
 }

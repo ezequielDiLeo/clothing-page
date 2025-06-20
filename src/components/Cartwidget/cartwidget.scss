@@ -1,26 +1,25 @@
-.modal-loyout {
+.modal-layout {
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 40;
+  z-index: 1000;
   width: 100vw;
   height: 100vh;
   background: rgba(0,0,0,0.5);
   font-family: 'Inter', sans-serif;
 }
 
-.menu-modal-cart.open {
+.menu-modal-cart {
   position: fixed;
   top: 0;
   right: 0;
   background: rgb(255, 255, 255);
   height: 100%;
-  overflow: hidden;
-  width: 100%;
-  max-width: 500px;
+  overflow-y: auto;
+  width: 80%;
   padding: 1rem;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5); 
-  z-index: 50; 
+  z-index: 1000; 
   transition: transform 0.3s ease-in-out; 
   .close-component {
     display: flex;
@@ -30,6 +29,10 @@
       font-size: 20px;
       color: black;
       padding: 10px;
+      transition: all ease 0.5s;
+      &:hover{
+        transform: rotate(180deg);
+      }
     }
   }
 }

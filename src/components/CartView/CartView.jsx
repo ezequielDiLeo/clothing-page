@@ -26,9 +26,8 @@ export const CartView = ({ onClose }) => {
         return(
             <section className='carrito m-0 p-5 gap-2'>
             <div className='p-3 text-center h-full'>
-                <h2 className=' text-xl text-black p-5'>No has agregado productos al carrito</h2>
+                <h2 className=' text-xl text-black p-5'>El carrito está vacío. No has agregado productos.</h2>
                 <hr />
-                <p className='p-3 text-black'>Vuelve al Inicio para agregar algún producto</p>
                 <Button className='btn-car' onClick={handleGoToShop}>Ir a comprar</Button>
             </div>
         </section>
@@ -67,5 +66,5 @@ export const CartView = ({ onClose }) => {
 }
 
 CartView.propTypes = {
-  onClose: PropTypes.func.isRequired, 
+  onClose: PropTypes.func, 
 };

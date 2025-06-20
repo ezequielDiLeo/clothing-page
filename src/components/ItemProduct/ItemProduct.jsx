@@ -43,12 +43,12 @@ export const ItemProduct = ({ product }) => {
         <div className='item-card-pr'>
           {filteredProducts.map((prod) => (
             <article key={prod.id} className='contenedor-pr'>
-              <div className='cont-img'>
-                <img src={prod.img} alt={prod.name} className='imagen m-5 items-center justify-center' />
+              <div className='cont-img-cate'>
+                <img src={prod.img} alt={prod.name} className='imagen items-center justify-center' />
               </div>
               <div className='cont-text'>
-                <h3 className='text-2xl font-light text-center'>{prod.name}</h3>
-                <p className='text-xl font-normal text-center'>${prod.price}</p>
+                <p className='text-2xl font-normal text-center'>${prod.price}</p>
+                <h3 className='text-xl font-light text-center'>{prod.name}</h3>
                 <div className='cont-btn-mas'>
                   <Link to={`/item/${prod.id}`}>
                     <Button className='btn-mas'>ver más</Button>

@@ -12,7 +12,7 @@ import { useMotionValue, animate } from "framer-motion";
 import PropTypes from 'prop-types';
 import byn from '../../assets/img/ropaByN.jpg';
 import modelo1 from '../../assets/img/modelo1-.jpg';
-import modelo2 from '../../assets/img/modelos2.jpg';
+import modelo2 from '../../assets/img/modelos2-.jpg';
 import modelo3 from '../../assets/img/modelos3.jpg';
 import 'swiper/css'
 import 'swiper/css/autoplay'
@@ -23,14 +23,13 @@ export const ItemList = ({ productos }) => {
   const sliderRef = useRef();
   const [, setWidth] = useState(0);
   const x = useMotionValue(0);
-  const loopedProductos = [...productos, ...productos, ...productos];
+  const productosDestacados = productos.filter((p) => p.season === 'invierno').slice(0, 4);
+  const productosSeleccionados = productos.filter(p => p.feature === 'isFeatured');
+  const loopedProductos = [...productosSeleccionados, ...productosSeleccionados, ...productosSeleccionados];
   const scrollAmount = 300;
 
-  const productosDestacados = productos
-  .filter(
-    (p) => p.season === 'invierno'
-  )
-  .slice(0, 4);
+
+
 
   const imagenes = [
     { src: modelo1, alt: 'modelo1', className: 'modelos1', },
@@ -110,9 +109,13 @@ export const ItemList = ({ productos }) => {
       </section>
         <Benefits />
 
+      <section className="triple-imagenes">
+        <p className='collection'>New Collections 2025</p>
+      </section>
+
       <section className='prod list_container'>
       <p className='collection-title'>
-        New Collection 2025.
+        Vestite con estilo. Vestite CLOTHINGC&E.
       </p>
         <hr />
         <section className='slider-wrapper'>
@@ -132,16 +135,17 @@ export const ItemList = ({ productos }) => {
                   dragElastic={0.2}
                 >
                   {loopedProductos.map((item) => (
-                    <article key={item.id} className='item-card'>
+                    <Link key={item.id} to={`/item/${item.id}`}>
+                    <article className='item-card'>
                       <div className='item'>
-                        <img src={item.img} alt={item.name} loading="lazy" />
+                        <img src={item.img} alt={item.name} loading="lazy" className='img-default'/>
+                        <img src={item.img2} alt={item.name} loading="lazy" className='img-hover'/>
                       </div>
-                      <h3 className='title-card'>{item.name}</h3>
                       <p className='price'>${item.price}</p>
-                      <Link to={`/item/${item.id}`}>
-                        <Button className='btn-mas'>ver más</Button>
-                      </Link>
+                      <h3 className='title-card'>{item.name}</h3>
+                      <p className='categoria'>{item.category}</p>
                     </article>
+                    </Link>
                   ))}
                 </motion.div>
           </motion.div>
@@ -159,13 +163,14 @@ export const ItemList = ({ productos }) => {
           <p className='collection-title'>Especial Invierno ❄️</p>
           <div className='grid-destacados'>
             {productosDestacados.map((item) => (
-              <article key={item.id} className='item-card'>
-                <div className='item'>
+              <article key={item.id} className='item-card-dest'>
+                <div className='item-in'>
                   <img src={item.img} alt={item.name} loading="lazy" />
                 </div>
-                <h3 className='text-xl pt-2 text-center'>{item.name}</h3>
-                <p className='font-semibold text-center'>${item.price}</p>
-                <Link to={`/item/${item.id}`}>
+                <p className='font-semibold price-in pt-2'>${item.price}</p>
+                <h3 className='text-xl pt-2 name-in'>{item.name}</h3>
+                <p className='categoria'>{item.category}</p>
+                <Link to={`/item/${item.id}`} className='a'>
                   <Button className='btn-mas'>ver más</Button>
                 </Link>
               </article>
