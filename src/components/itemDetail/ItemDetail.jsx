@@ -39,9 +39,10 @@ const handleAgregar = () => {
 
   return (
     <div className='detail_container'>
-        <article key={item.id} className='justify-center article'>
-            <Button className='btn-volver' onClick={handleVolver}>Volver</Button>
-            <hr />
+            <div className='cont-boton-volver'>
+              <Button className='btn-volver' onClick={handleVolver}>Volver</Button>
+            </div>
+        <article key={item.id} className='article justify-center'>
             <div className='contenedor-all'>
               <div className='car-img'>
                 {[item.img, item.img2, item.img3, item.img4].map((img, index) => (
@@ -63,6 +64,7 @@ const handleAgregar = () => {
                 <h1 className='title-desc'>{item.name}</h1>
                 <hr></hr>
                 <p className='price'>${item.price}</p>
+                <p className='pl-4 pt-3 descuento'>10% de descuento pagando con Transferencia o depósito</p>
                 <p className='descripcion' >{item.description}</p>
                 <div className='cont-agregar-cant'>
                   <div className='cont-agregar'>
@@ -81,7 +83,7 @@ const handleAgregar = () => {
               <p className='text-black p-5 text-m font-light'>envios a todo el pais 🌐</p>
             </div>
         <div>
-          <ProductDetails product={{descripcion: item.description}} />
+          <ProductDetails product={{ ...item, tipo: item.category }} />
         </div>
         </article>
 

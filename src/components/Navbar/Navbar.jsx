@@ -11,20 +11,24 @@ import { AuthModal } from '../auth/auth'
 /*......LINKS.....*/ 
 const links = [
   {
-    label: "Remeras",
-    href:"/items/remeras",
-  },
-  {
     label: "Pantalones",
     href: "/items/pantalones",
   },
   {
-    label: "Camisas",
-    href: "/items/camisas",
-  },
-  {
     label: "Zapatillas",
     href: "/items/zapatillas",
+  },
+  {
+    label: "Camperas",
+    href: "/items/camperas",
+  },
+  {
+    label: "Remeras",
+    href:"/items/remeras",
+  },
+  {
+    label: "Camisas",
+    href: "/items/camisas",
   },
   {
     label: "Buzos",
