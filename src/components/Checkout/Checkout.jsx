@@ -35,7 +35,7 @@ export const Checkout = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
-
+  
   // Función submit del form
   const onSubmit = async (values) => {
     if (cart.length === 0) {
@@ -47,7 +47,7 @@ export const Checkout = () => {
       });
       return;
     }
-
+    
     const order = {
       cliente: values,
       items: cart,
@@ -88,8 +88,9 @@ export const Checkout = () => {
 
       Swal.fire({
         title: '¡Gracias por tu compra!',
+        html: `Tu número de orden es: <strong>${docRef.id}</strong>`,
         icon: 'success',
-        timer: 3000,  
+        timer: 5000,  
         showConfirmButton: false, 
         timerProgressBar: true,
       }).then(() => {
