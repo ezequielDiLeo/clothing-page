@@ -13,18 +13,23 @@
   position: fixed;
   top: 0;
   right: 0;
-  background: rgb(255, 255, 255);
+  background: #fff;
   height: 100%;
-  overflow-y: auto;
   width: 30%;
-  padding: 1rem;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5); 
-  z-index: 1000; 
-  transition: transform 0.3s ease-in-out; 
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   .close-component {
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(243, 243, 243);
     width: 100%;
+    padding: 0.8rem;
+    .mi-compra{
+      font-weight: 600;
+      font-size: 15px;
+    }
     .close {
       font-size: 20px;
       color: black;
@@ -36,6 +41,35 @@
     }
   }
 }
+
+
+.cart-badge-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+
+  .cart-icon {
+    height: 50px;
+    width: auto;
+  }
+
+  .cart-count {
+    position: absolute;
+    top: 17px;
+    right: 15px;
+    color: rgb(0, 0, 0);
+    font-size: 13px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    line-height: 1;
+    min-width: 18px;
+    text-align: center;
+  }
+}
+
 
 @media screen and (max-width: 768px){
   .menu-modal-cart {

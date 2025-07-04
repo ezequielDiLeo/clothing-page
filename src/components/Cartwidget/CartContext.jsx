@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { createContext } from 'react'
 
@@ -7,7 +7,14 @@ export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
 
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState(() => {
+        const storedCart = localStorage.getItem('cart');
+        return storedCart ? JSON.parse(storedCart) : [];
+    })
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
 
     const addToCart = (itemToCart) => {
         setCart((prevCart) => {
@@ -50,6 +57,10 @@ export const CartProvider = ({ children }) => {
         return cart.some(item => item.id ===id)
     }
 
+    const removeItem = (id) => {
+        setCart((prevCart) => prevCart.filter(item => item.id !== id));
+    };
+
     const clearCart = () => {
         setCart([])
     }
@@ -72,6 +83,7 @@ export const CartProvider = ({ children }) => {
             totalCart,
             increaseQty,
             decreaseQty,
+            removeItem,
         }}>
 
         {children}

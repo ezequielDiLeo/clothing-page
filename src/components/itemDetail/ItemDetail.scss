@@ -18,23 +18,24 @@
     
     .btn-volver{
         margin-top: 20px;
+        margin-left: 20px;
         width: auto;
         height: auto;
-        font-size: 15px;
+        font-size: 10px;
         background: linear-gradient(
-        135deg,
-        rgba(0, 0, 0, 0.1),
-        rgba(0, 0, 0, 0.05)
+          135deg,
+          rgba(0, 0, 0, 0.281),
+          rgba(0, 0, 0, 0.205)
         );
         border: 1px solid rgba(0, 0, 0, 0.185);
         backdrop-filter: blur(3px);
         -webkit-backdrop-filter: blur(55px);
         color: rgb(0, 0, 0);
-        padding: 0.30rem 1rem;
+        padding: 0.30rem 0.8rem;
         border-radius: 12px;
         font-weight: bold;
         cursor: pointer;
-        transition: background 0.3s ease, transform 0.2s ease;
+        transition: background-color 0.3s ease, transform 0.2s ease;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
     .contenedor-all{
@@ -98,6 +99,7 @@
                 font-size: 30px;
                 font-weight: 600;
                 text-transform: capitalize;
+                font-family: "Playfair Display", serif;
             }
             
             .price{

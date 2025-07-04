@@ -1,4 +1,4 @@
-
+import { ProductosRelacionados } from '../productosRelacionados/ProductosRelacionados';
 import { useContext, useState } from 'react'
 import { Button } from '../Button/Button'
 import './ItemDetail.scss'
@@ -6,6 +6,7 @@ import { CartContext } from '../Cartwidget/CartContext'
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import ProductDetails from '../medidas/medidas'
+import atras from '../../assets/img/atras.svg'
 
 
 export const ItemDetail = ({item}) => {
@@ -40,7 +41,7 @@ const handleAgregar = () => {
   return (
     <div className='detail_container'>
             <div className='cont-boton-volver'>
-              <Button className='btn-volver' onClick={handleVolver}>Volver</Button>
+              <Button className='btn-volver flex justify-center' onClick={handleVolver}><img src={atras}></img></Button>
             </div>
         <article key={item.id} className='article justify-center'>
             <div className='contenedor-all'>
@@ -82,9 +83,12 @@ const handleAgregar = () => {
             <div className="mas-prod">
               <p className='text-black p-5 text-m font-light'>envios a todo el pais 🌐</p>
             </div>
-        <div>
-          <ProductDetails product={{ ...item, tipo: item.category }} />
-        </div>
+          <div className='cont-product-details w-full'>
+            <ProductDetails product={{ ...item, tipo: item.category }} />
+          </div>
+          
+          <ProductosRelacionados categoriaActual={item.category} productoId={item.id} />  
+
         </article>
 
     </div>

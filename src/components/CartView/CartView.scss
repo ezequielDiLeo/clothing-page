@@ -1,26 +1,150 @@
-.carrito{
-    min-height: 100vh;
-    background: white;
-    width: 100%;
-    background-size: cover;
-    object-fit: cover;
-    color: black;
+.carrito {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
 
-    .btn-car{
-        background: linear-gradient(
-        135deg,
-        rgba(0, 0, 0, 0.1),
-        rgba(0, 0, 0, 0.05)
-        );
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        backdrop-filter: blur(3px);
-        -webkit-backdrop-filter: blur(55px);
-        color: rgb(0, 0, 0);
-        padding: 0.75rem 1.5rem;
-        border-radius: 12px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background 0.3s ease, transform 0.2s ease;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  .cart-items-scroll {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 130px;
+    padding-right: 0.5rem;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
+
+    li {
+      display: flex;
+      gap: 1rem;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 1rem;
+      align-items: center;
+
+      img {
+        width: 100px;
+        border-radius: 8px;
+      }
+
+      .cont-info-prod {
+        color: black;
+
+        h3 {
+          font-weight: 500;
+          margin-bottom: 0.25rem;
+        }
+
+        p {
+          margin: 0.25rem 0;
+        }
+
+        .contendor-btns {
+          display: flex;
+          gap: 0.5rem;
+
+          .btn-car-mas,
+          .btn-car-menos,
+          .btn-car-eliminar {
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.05);
+            border: none;
+            color: black;
+
+            .basura {
+              width: 1rem;
+              height: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .cont-pagar-compra {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10;
+
+    h4 {
+      margin: 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .btn-car {
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.05));
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-weight: bold;
+      color: black;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+    .cart-icon-wrapper {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        .cart-icon {
+            width: 100%;
+            height: 90px;
+            object-fit: contain;
+        }
+    
+        .cart-count {
+            position: absolute;
+            right: 166px;
+            top: 42px;
+            color: rgb(0, 0, 0);
+            font-size: 13px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 50%;
+            line-height: 1;
+            min-width: 20px;
+            text-align: center;
+            pointer-events: none;
+        }
+    }
+    
+    .btn-car {
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.05));
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-weight: bold;
+      color: black;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
 }
