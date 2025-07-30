@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './ProductosRelacionados.scss';
+import './productosRelacionados.scss';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
