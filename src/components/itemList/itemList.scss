@@ -358,7 +358,7 @@
         text-align: center;
       }
       .item{
-        height: 100% !important;
+        position: relative;
         width: 100% !important;
       }
       .title-card {
@@ -388,6 +388,7 @@
     }
 
     .item {
+      position: relative;
       height: 220px;
 
       img {
