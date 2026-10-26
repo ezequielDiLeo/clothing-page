@@ -1,31 +1,35 @@
 import { useState } from 'react';
-import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
 import './ItemProduct.scss';
 import PropTypes from 'prop-types';
+import { formatPrice, parsePrice } from '../../utils/price'
 
 export const ItemProduct = ({ product }) => {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
 
-  const categoryIn = product[0]?.category.toUpperCase() || 'Sin categoría';
+  const categoryIn = String(product[0]?.category || 'Colección').toUpperCase();
 
   const filteredProducts = product.filter((prod) =>{
     const min = minPrice === '' ? 0 : Number(minPrice);
     const max = maxPrice === '' ? Infinity : Number(maxPrice);
-    return prod.price >= min && prod.price <= max;
-});
+    const price = parsePrice(prod.price)
+    return Number.isFinite(price) && price >= min && price <= max
+  })
 
   return (
-    <section className='container-pr'>
-      <hr />
+    <main className='container-pr'>
+      <header className="category-heading">
+        <p className="section-eyebrow">CLOTHING C&E · COLECCIÓN</p>
+        <h1>{categoryIn}</h1>
+        <p>Diseño, comodidad y actitud en cada detalle.</p>
+      </header>
       <div className='layout'>
-        {/* Filtro */}
         <aside className='filtro-precio'>
-          <p className='categoria-prod'>{categoryIn}</p>
-          <p className='block mb-2 font-semibold filtro'>Filtrar por precio</p>
-          <div className='flex flex-col gap-4'>
+          <p className='filtro'>Filtrar por precio</p>
+          <div className='filter-fields'>
             <input
+              aria-label="Precio mínimo"
               type='number'
               placeholder='Precio mínimo'
               value={minPrice}
@@ -33,6 +37,7 @@ export const ItemProduct = ({ product }) => {
               className='border px-2 py-1 rounded w-full text-center placeholder'
             />
             <input
+              aria-label="Precio máximo"
               type='number'
               placeholder='Precio máximo'
               value={maxPrice}
@@ -40,30 +45,33 @@ export const ItemProduct = ({ product }) => {
               className='border px-2 py-1 rounded w-full text-center placeholder'
             />
           </div>
+          <p className="product-count">{filteredProducts.length} {filteredProducts.length === 1 ? 'producto' : 'productos'}</p>
         </aside>
 
-        {/* Productos */}
         <div className='item-card-pr'>
-          {filteredProducts.map((prod) => (
+          {filteredProducts.length === 0 ? (
+            <div className="category-empty">
+              <h2>{product.length === 0 ? 'Próximamente en esta colección' : 'No hay productos en ese rango'}</h2>
+              <p>{product.length === 0 ? 'Estamos preparando nuevas prendas para vos.' : 'Probá ajustando el precio mínimo o máximo.'}</p>
+            </div>
+          ) : filteredProducts.map((prod) => (
             <article key={prod.id} className='contenedor-pr'>
-              <div className='cont-img-cate'>
-                <img src={prod.img} alt={prod.name} className='imagen items-center justify-center' />
-              </div>
+              <Link to={`/item/${prod.id}`} className='cont-img-cate' aria-label={`Ver ${prod.name}`}>
+                <img src={prod.img} alt={prod.name} className='imagen' loading="lazy" />
+              </Link>
               <div className='cont-text'>
-                <p className='precio-descr'>${prod.price}</p>
+                <p className='precio-descr'>{formatPrice(prod.price)}</p>
                 <h3 className='prod-name-descr'>{prod.name}</h3>
                 <h3 className='prod-category-descr'>{prod.category}</h3>
                 <div className='cont-btn-mas'>
-                  <Link to={`/item/${prod.id}`}>
-                    <Button className='btn-mas-descr '>ver más</Button>
-                  </Link>
+                  <Link className='btn-mas-descr' to={`/item/${prod.id}`}>Ver producto</Link>
                 </div>
               </div>
             </article>
           ))}
         </div>
       </div>
-    </section>
+    </main>
 
   );
 };
@@ -73,7 +81,7 @@ ItemProduct.propTypes = {
     PropTypes.shape({
       id: PropTypes.any.isRequired,
       name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
+      price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
       img: PropTypes.string.isRequired,
       category: PropTypes.string.isRequired,
     })

@@ -1,204 +1,294 @@
 import './Navbar.scss'
-import { useContext, useEffect, useState } from 'react'
-import logo from '../../assets/img//iconoPnWB.png'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { ChevronDown, CircleHelp, House, LogOut, Menu, UserRound, X } from 'lucide-react'
+import logo from '../../assets/img/iconoPnWB.png'
 import { Cartwidget } from '../Cartwidget/Cartwidget'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext/UserContext'
-import { Button } from '../Button/Button'
-import salir from '../../assets/img/cerrar-sesion.png'
 import { AuthModal } from '../auth/auth'
 
-/*......LINKS.....*/ 
-const links = [
-  {
-    label: "Pantalones",
-    href: "/items/pantalones",
-  },
-  {
-    label: "Zapatillas",
-    href: "/items/zapatillas",
-  },
-  {
-    label: "Camperas",
-    href: "/items/camperas",
-  },
-  {
-    label: "Remeras",
-    href:"/items/remeras",
-  },
-  {
-    label: "Camisas",
-    href: "/items/camisas",
-  },
-  {
-    label: "Buzos",
-    href: "/items/buzos",
-  },
-  {
-    label: "Lentes",
-    href: "/items/lentes",
-  },
+const categoryLinks = [
+  { label: 'Pantalones', href: '/items/pantalones' },
+  { label: 'Zapatillas', href: '/items/zapatillas' },
+  { label: 'Camperas', href: '/items/camperas' },
+  { label: 'Remeras', href: '/items/remeras' },
+  { label: 'Camisas', href: '/items/camisas' },
+  { label: 'Buzos', href: '/items/buzos' },
+  { label: 'Lentes', href: '/items/lentes' },
 ]
 
-const ayudaLinks = [
-  {
-    label: "Centro de Ayuda",
-    href: "/ayuda"
-  },
-  {
-    label: "Preguntas Frecuentes",
-    href: "/faq"
-  },
+const helpLinks = [
+  { label: 'Centro de ayuda', href: '/ayuda' },
+  { label: 'Preguntas frecuentes', href: '/faq' },
+  { label: 'Envíos', href: '/envios' },
+  { label: 'Devoluciones', href: '/devoluciones' },
 ]
-
 
 export const Navbar = () => {
-  const {user, logOut} = useContext(UserContext);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [isLinkOpen, setIsLinkOpen] = useState(false);
-  const [isHelpOpen, setIsHelpOpen] = useState(false);
-  const [showAuth, setShowAuth] = useState(false);
-  const [showCart, setShowCart] = useState(false);
+  const { user, authReady, logOut } = useContext(UserContext)
+  const location = useLocation()
+  const navigationRef = useRef(null)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [categoryOpen, setCategoryOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(false)
+  const [showAuth, setShowAuth] = useState(false)
 
-  const handleOpenCart = () => setShowCart(true);
+  useEffect(() => {
+    setMenuOpen(false)
+    setCategoryOpen(false)
+    setHelpOpen(false)
+  }, [location.pathname])
 
-  const handleCloseCart = () => setShowCart(false);
+  useEffect(() => {
+    if (!categoryOpen && !helpOpen) return undefined
 
-    useEffect(() => {
-      if(menuOpen) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'auto';
+    const closeOnOutsideClick = (event) => {
+      if (!navigationRef.current?.contains(event.target)) {
+        setCategoryOpen(false)
+        setHelpOpen(false)
       }
-
-      return () => {
-        document.body.style.overflow = 'auto';
+    }
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setCategoryOpen(false)
+        setHelpOpen(false)
       }
-    }, [menuOpen]);
-    
+    }
 
-    return (
+    document.addEventListener('pointerdown', closeOnOutsideClick)
+    window.addEventListener('keydown', closeOnEscape)
+    return () => {
+      document.removeEventListener('pointerdown', closeOnOutsideClick)
+      window.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [categoryOpen, helpOpen])
+
+  useEffect(() => {
+    if (!menuOpen) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [menuOpen])
+
+  const closeMenus = () => {
+    setMenuOpen(false)
+    setCategoryOpen(false)
+    setHelpOpen(false)
+  }
+
+  const handleLogout = () => {
+    closeMenus()
+    logOut()
+  }
+
+  const categoryActive = location.pathname.startsWith('/items/') || location.pathname.startsWith('/productos/')
+
+  return (
     <>
-      <header className='header'>
-        <div className='header_container'>
-          
-          {/* LOGO CENTRADO */}
-          <Link className='cont-img' to="/">
-            <img loading="lazy" className="logo" src={logo} alt="logo" />
-          </Link> 
-          
-          {/* BOTÓN HAMBURGUESA Y MODAL */}
-          <>
-          {!menuOpen && (
-            <button className="hamburger" onClick={() => setMenuOpen(true)}>☰</button>
-          )}
-            {menuOpen && (
-              <div className='modal-loyout' onClick={() => setMenuOpen(false)}>
-                <div className="menu-modal open" onClick={(e) => e.stopPropagation()}>
-                    <div className="flex justify-between items-center mb-4">
+      <header className="header">
+        <div className="header_container">
+          <button
+            className="hamburger"
+            type="button"
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((isOpen) => !isOpen)}
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
 
-                      <button className="text-2xl font-bold equis" onClick={() => setMenuOpen(false)}>✕</button>
+          <Link className="cont-img" to="/" aria-label="Clothing C&E, inicio">
+            <img className="logo" src={logo} alt="Clothing C&E" />
+          </Link>
 
-                      <div className='logOut-cont' onClick={logOut}>
-                        <Button variant='white' onClick={logOut} className='btn-logOut text-xs '>
-                          <img src={salir} alt="cerrar sesion" className='btn'/>
-                        </Button>
-                        <p className='text-white user'>{user.email}</p>
-                      </div>
-
-                    </div>
-                  <div className='cont-img-logo'>
-                    <img className='imagen-logo' src={logo} alt="logo" />
-                  </div>
-                  <nav className="modal-nav">
-                    {links.map(link => (
-                      <NavLink className='hamburguer-link' key={link.href} to={link.href} onClick={() => setMenuOpen(false)}>
-                        {link.label}
-                      </NavLink>
-                    ))}
-                    {ayudaLinks.map(link => (
-                      <NavLink className='hamburguer-link' key={link.href} to={link.href} onClick={() => setMenuOpen(false)}>
-                        {link.label}
-                      </NavLink>
-                    ))}
-                  </nav>
-                </div>
-              </div>
-            )}
-
-          </>
-
-          
-            <div className='center-nav'>
-              {/* SHOP */}
-              <div 
-                className='shop-dropdown' 
-                onMouseEnter={() => setIsLinkOpen(true)} 
-                onMouseLeave={() => setIsLinkOpen(false)}
+          <nav ref={navigationRef} className="center-nav" aria-label="Navegación principal">
+            <NavLink to="/" end className={({ isActive }) => `nav-home${isActive ? ' is-active' : ''}`}>
+              <House size={18} strokeWidth={1.8} aria-hidden="true" />
+              <span>Inicio</span>
+            </NavLink>
+            <div className="nav-dropdown">
+              <button
+                className={`nav-trigger${categoryActive ? ' is-active' : ''}`}
+                type="button"
+                aria-expanded={categoryOpen}
+                onClick={() => {
+                  setCategoryOpen((isOpen) => !isOpen)
+                  setHelpOpen(false)
+                }}
               >
-                <div className="shop-container">
-                  <button className='shop' onClick={() => setIsLinkOpen(!isLinkOpen)}>SHOP</button>
-                  {isLinkOpen && (
-                    <div className='dropdown'>
-                      {links.map(link => (
-                        <NavLink key={link.href} to={link.href} onClick={() => setIsLinkOpen(false)}>
-                          {link.label}
-                        </NavLink>
-                      ))}
-                    </div>
-                  )}
+                Colección
+                <ChevronDown size={15} aria-hidden="true" />
+              </button>
+              {categoryOpen && (
+                <div className="dropdown category-dropdown">
+                  <p className="dropdown-eyebrow">Explorá la colección</p>
+                  {categoryLinks.map((link) => (
+                    <NavLink
+                      key={link.href}
+                      to={link.href}
+                      onClick={closeMenus}
+                      className={({ isActive }) => (isActive ? 'is-active' : '')}
+                    >
+                      {link.label}
+                    </NavLink>
+                  ))}
                 </div>
-              </div>
-
-              {/* AYUDA */}
-              <div 
-                className='shop-dropdown' 
-                onMouseEnter={() => setIsHelpOpen(true)} 
-                onMouseLeave={() => setIsHelpOpen(false)}
-              >
-                <div className="shop-container">
-                  <button className='shop'>AYUDA</button>
-                  {isHelpOpen && (
-                    <div className='dropdown'>
-                      {ayudaLinks.map(link => (
-                        <NavLink key={link.href} to={link.href} onClick={() => setIsHelpOpen(false)}>
-                          {link.label}
-                        </NavLink>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
+              )}
             </div>
 
-          <div className='actions'>
-            {user.logged ? (
-              <div className='logOut-cont logout'>
-                <Button variant='white' onClick={logOut} className='btn-logOut text-xs '>
-                  <img className='btn' src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABZUlEQVR4nO3WQS8dYRTG8d9Wy7IURWhTPgzWWp9AXAvxadCm20YqaSrYs5BgRdMbVmxJCNVF0ZA3OZJZyL3DTCcW/sm7O3Oed86cc+bhmSdID2pYRR0X+INDLGEGnWUKdmMe17hpci7xBa+Lio7iPJL+xVeMYRAv0YJ+fMBCCKfYU/Q9VnQK/yLRQgg0I8V8x9FjhUdDNJV3WkV0Z8pbmWjiU6a8lY7MdTRSnm/aiDVsoz1PcC3eNnVvUTYj124e8ZUITuNRlPYQzSW+H4HvlMMr7ETOeqPNdtfNbU0SrufYYved7ScnvBcB71Vc6pX/1Fw/mzXXZInjtPWQcXqDq1ggAwWFNx6yQBJzcdNvKqYr093JVVTKSOa3WLl4LWMEFvE2xzMDYQSOiziQxDDOMtYn/So/YgiteBEXGo+euIrYE/QqSCdmM0kbnXS5z+hQsjOZwDJ+4XfY2wP8CLdS2F0+o2xuAT45kt+48OpRAAAAAElFTkSuQmCC" alt="logout-rounded--v1"></img>
-                </Button>
-                <p className='text-black user'>{user.email}</p>
-              </div>
-            ) : (
-              <button 
-                className='h-full text-center'
-                onClick={() => setShowAuth(true)} 
+            <div className="nav-dropdown">
+              <button
+                className={`nav-trigger${helpLinks.some((link) => link.href === location.pathname) ? ' is-active' : ''}`}
+                type="button"
+                aria-expanded={helpOpen}
+                onClick={() => {
+                  setHelpOpen((isOpen) => !isOpen)
+                  setCategoryOpen(false)
+                }}
               >
-                <img className='h-6 px-2' src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACWUlEQVR4nO2ZP08VQRDAfz7ztOAJhQlWWII2IhbS2dEg+CCBDwFaUom0EP0CWosQQPwCkkCDjR9A+ScFNmDyCtHGZ+SZifOSyQY57ti7Pcj9kkkuuZ3Z2dvZmd09KCgo8EkZGAXmgQ3gp4o8z+k7aZNLhoFtoBEh0maIHFECnp/CcVdmVDc4rvP7wFOgG2hRuQtM6jt3EMHDxjq0AFROaH8NWHR0qgTiihPz4vylU+hJmyWjtxVqYY86YXPSlz9uJg6M/ggBmDcOSMzH5ZnRf0MANo0DdxLoy8Ju6kudyJwfxoE44dNEdJr6YuvcDaDV6H8nAOc+hOaMA1Kk4jJl9GfJQRqV1BgnfL6FTqNlp5Atxihkb/NQyNBdpd0WLEXMRKvj/BHwiMDMOIM40CLVo9mpos9TTtiITJMDSscMIkqO1PkSOaKq8Rzl/FYewuZ/lDWjyN7msxY7kU+aKkfyfKQsKLjIdADLwGGC24e4cqjFrsOn87UMHG84UvM1iOUAzjdUZCbOjA2b+6RPr++Djv0iWdHw2ecfYyyLKlr2PQC7g+wkfbp8D2DFGBsnfZ6Y/l75MDhmDO4BbaRHG/DV9Nfnw2iLY3Q94TVKFBXgg+nnI3DZl/F+ZzHvAA98GeefrR1jvw7cwzOP9SRlT1XvgYcJs5PoDOgas3Z/p3lLUXVulW3BeQdM6GxJJrmuV/BX9blL301oW9Fx7UjGGyRl2vV0Vfe4ZagDr4EbZMhN4AWwewbHd/UXlbedZ1Jua/5+CawBX3Q3+Uulpot0VdvIeroV2umCAi4AfwF1jXX6i4PPbQAAAABJRU5ErkJggg==" alt="login-register"></img>
+                Ayuda
+                <ChevronDown size={15} aria-hidden="true" />
+              </button>
+              {helpOpen && (
+                <div className="dropdown help-dropdown">
+                  <p className="dropdown-eyebrow">Estamos para ayudarte</p>
+                  {helpLinks.map((link) => (
+                    <NavLink
+                      key={link.href}
+                      to={link.href}
+                      onClick={closeMenus}
+                      className={({ isActive }) => (isActive ? 'is-active' : '')}
+                    >
+                      {link.label}
+                    </NavLink>
+                  ))}
+                </div>
+              )}
+            </div>
+          </nav>
+
+          <div className="actions">
+            {!authReady ? (
+              <span className="account-placeholder" aria-hidden="true" />
+            ) : user.logged ? (
+              <button
+                className="account-button logout"
+                type="button"
+                aria-label="Cerrar sesión"
+                onClick={logOut}
+              >
+                <LogOut size={19} aria-hidden="true" />
+                <span>Cerrar sesión</span>
+              </button>
+            ) : (
+              <button
+                className="account-button"
+                type="button"
+                onClick={() => setShowAuth(true)}
+              >
+                <UserRound size={19} aria-hidden="true" />
+                <span>Ingresar</span>
               </button>
             )}
-            <div className='cont-login flex justify-between'>
-                <button onClick={handleOpenCart}>
-                  <Cartwidget />
-                </button>
-            </div>
+            <Cartwidget />
           </div>
-          
-          {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
-
         </div>
       </header>
-           {showCart && <Cartwidget onClose={handleCloseCart} />}
+
+      {menuOpen && (
+        <div className="modal-loyout" onClick={closeMenus}>
+          <aside
+            className="menu-modal"
+            aria-label="Menú de navegación"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="drawer-header">
+              <span className="drawer-title">Menú</span>
+              <button
+                className="drawer-close"
+                type="button"
+                aria-label="Cerrar menú"
+                onClick={closeMenus}
+              >
+                <X size={21} />
+              </button>
+            </div>
+
+            <Link className="drawer-home" to="/" onClick={closeMenus}>
+              Inicio
+            </Link>
+            <div className="drawer-section">
+              <p className="drawer-section-title">Colección</p>
+              <nav className="modal-nav" aria-label="Categorías">
+                {categoryLinks.map((link) => (
+                  <NavLink
+                    key={link.href}
+                    to={link.href}
+                    onClick={closeMenus}
+                    className={({ isActive }) => (isActive ? 'is-active' : '')}
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
+              </nav>
+            </div>
+
+            <div className="drawer-section">
+              <p className="drawer-section-title">
+                <CircleHelp size={15} aria-hidden="true" />
+                Ayuda
+              </p>
+              <nav className="modal-nav" aria-label="Ayuda">
+                {helpLinks.map((link) => (
+                  <NavLink
+                    key={link.href}
+                    to={link.href}
+                    onClick={closeMenus}
+                    className={({ isActive }) => (isActive ? 'is-active' : '')}
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
+              </nav>
+            </div>
+
+            <div className="drawer-account">
+              {user.logged ? (
+                <>
+                  <span className="drawer-user">{user.email}</span>
+                  <button className="drawer-account-action" type="button" onClick={handleLogout}>
+                    <LogOut size={17} aria-hidden="true" />
+                    Cerrar sesión
+                  </button>
+                </>
+              ) : (
+                <button
+                  className="drawer-account-action"
+                  type="button"
+                  onClick={() => {
+                    closeMenus()
+                    setShowAuth(true)
+                  }}
+                >
+                  <UserRound size={17} aria-hidden="true" />
+                  Ingresar o crear cuenta
+                </button>
+              )}
+            </div>
+          </aside>
+        </div>
+      )}
+
+      {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
     </>
   )
 }

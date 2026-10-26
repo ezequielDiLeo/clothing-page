@@ -1,42 +1,67 @@
 import { useContext, useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
+import { ShoppingBag, X } from 'lucide-react'
 import { CartContext } from './CartContext'
-import { CartView } from '../CartView/CartView';
-import bag from '../../assets/img/bag.png'
+import { CartView } from '../CartView/CartView'
 import './cartwidget.scss'
 
 export const Cartwidget = () => {
-  
-  const { itemInCart } = useContext (CartContext);
-  const [openModal, setOpenModal] = useState(false);
+  const { itemInCart } = useContext(CartContext)
+  const [openModal, setOpenModal] = useState(false)
+  const itemCount = itemInCart()
 
-    useEffect(() => {
-      if (openModal) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
-    }, [openModal]);
+  useEffect(() => {
+    if (!openModal) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setOpenModal(false)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [openModal])
 
   return (
     <>
-      <div onClick={() => setOpenModal(true)} className='cart-badge-container'>
-          <img src={bag} alt="shopping-bag" className='cart-icon' />
-          {itemInCart() > 0 && (
-            <span className='cart-count'>{itemInCart()}</span>
-          )}
-      </div>
+      <button
+        className="cart-trigger"
+        type="button"
+        aria-label={`Abrir carrito, ${itemCount} ${itemCount === 1 ? 'producto' : 'productos'}`}
+        onClick={() => setOpenModal(true)}
+      >
+        <ShoppingBag size={21} strokeWidth={1.7} aria-hidden="true" />
+        {itemCount > 0 && <span className="cart-count">{itemCount}</span>}
+      </button>
 
-      {openModal && (
+      {openModal && createPortal(
         <div className="modal-layout" onClick={() => setOpenModal(false)}>
-          <div className="menu-modal-cart open" onClick={(e) => e.stopPropagation()}>
-            <div className='close-component'>
-              <button className="close" onClick={() => setOpenModal(false)}>✕</button>
-              <span className='mi-compra'>MI COMPRA</span>
+          <section
+            className="menu-modal-cart"
+            aria-labelledby="cart-dialog-title"
+            aria-modal="true"
+            role="dialog"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="close-component">
+              <h2 className="mi-compra" id="cart-dialog-title">Tu bolsa</h2>
+              <button
+                className="close"
+                type="button"
+                aria-label="Cerrar carrito"
+                onClick={() => setOpenModal(false)}
+              >
+                <X size={20} />
+              </button>
             </div>
-            <hr />
             <CartView onClose={() => setOpenModal(false)} />
-          </div>
-        </div>
+          </section>
+        </div>,
+        document.body,
       )}
     </>
   )

@@ -1,61 +1,125 @@
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import './footer.scss'
+
+import './footer.scss';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export const Footer = () => {
-
-
   useEffect(() => {
     AOS.init({
-      duration: 1000,
+      duration: 800,
       once: true,
+      offset: 30,
     });
   }, []);
 
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="footer">
       <div className="footer__container">
-        <div className="footer__section">
-          <h4 className="footer__title">Tienda</h4>
+        {/* Marca */}
+        <div className="footer__brand" data-aos="fade-up">
+          <Link to="/" className="footer__logo" aria-label="Clothing C&E - Inicio">
+            CLOTHING<span> C&E.</span>
+          </Link>
+
+          <p className="footer__description">
+            Tu estilo, tus reglas.
+            <br />
+            Prendas para acompañarte todos los días.
+          </p>
+
+          <Link to="/items/remeras" className="footer__shop-link">
+            Descubrí la colección
+            <i className="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </Link>
+        </div>
+
+        {/* Navegación */}
+        <nav className="footer__section" aria-label="Navegación del footer">
+          <h3 className="footer__title">Explorá</h3>
           <ul>
-            <li><a href="#">Sobre nosotros</a></li>
-            <li><a href="#">Novedades</a></li>
+            <li>
+              <Link to="/items/remeras">Colección</Link>
+            </li>
+            <li>
+              <Link to="/items/remeras">Todos los productos</Link>
+            </li>
+            <li>
+              <Link to="/">Inicio</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Atención al cliente */}
+        <div className="footer__section">
+          <h3 className="footer__title">Información</h3>
+          <ul>
+            <li>
+              <Link to="/envios">Envíos</Link>
+            </li>
+            <li>
+              <Link to="/devoluciones">Cambios y devoluciones</Link>
+            </li>
+            <li>
+              <a href="mailto:ezemr1996@gmail.com">
+                Contacto
+              </a>
+            </li>
           </ul>
         </div>
 
-        <div className="footer__section">
-          <h4 className="footer__title">Ayuda</h4>
-          <ul>
-            <li><Link to="/envios">Envíos</Link></li>
-            <li><Link to="/devoluciones">Devoluciones</Link></li>
-          </ul>
-        </div>
+        {/* Contacto */}
+        <div className="footer__contact">
+          <h3 className="footer__title">¿Hablamos?</h3>
 
-        <div className="footer__section">
-          <h4 className="footer__title">Contacto</h4>
-          <ul>
-            <li><i className="fa-solid fa-phone"></i> +54 11 1234-5678</li>
-            <li><a href='mailto:ezemr1996@gmail.com'><i className="fa-solid fa-envelope"></i> ezemr1996@gmail.com</a></li>
-            <li><i className="fa-solid fa-location-dot"></i> Buenos Aires, Argentina</li>
-          </ul>
-        </div>
+          <p className="footer__contact-text">
+            Estamos para ayudarte con tu próxima elección.
+          </p>
 
-        <div className="footer__social">
-          <h4 className="footer__title">Seguinos</h4>
-          <div className="footer__icons">
-            <a href="facebook.com"><i className="fa-brands fa-facebook-f"></i></a>
-            <a href="mailto:ezemr1996@gmail.com"><i className="fa-solid fa-envelope"></i></a>
-            <a href="linkedin"><i className="fa-brands fa-whatsapp"></i></a>
+          <a
+            href="mailto:ezemr1996@gmail.com"
+            className="footer__email"
+          >
+            <i className="fa-regular fa-envelope" aria-hidden="true"></i>
+            ezemr1996@gmail.com
+          </a>
+
+          <p className="footer__location">
+            <i className="fa-solid fa-location-dot" aria-hidden="true"></i>
+            Buenos Aires, Argentina
+          </p>
+
+          <div className="footer__social">
+            <a
+              href="mailto:ezemr1996@gmail.com"
+              aria-label="Enviar un correo electrónico"
+              title="Email"
+            >
+              <i className="fa-regular fa-envelope" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
       </div>
 
+      {/* Frase de marca */}
+      <div className="footer__statement" aria-hidden="true">
+        VESTÍ TU PROPIA HISTORIA.
+      </div>
+
+      {/* Pie legal */}
       <div className="footer__bottom">
-        <p>&copy; 2025 Tienda de Ropa. Todos los derechos reservados.</p>
+        <p>
+          © {currentYear} Clothing C&E. Todos los derechos reservados.
+        </p>
+
+        <Link to="/" className="footer__back-top">
+          Volver al inicio
+          <i className="fa-solid fa-arrow-up" aria-hidden="true"></i>
+        </Link>
       </div>
     </footer>
   );
-}
+};

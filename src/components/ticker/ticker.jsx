@@ -14,6 +14,9 @@ export const Ticker = () => {
         <span>{mensaje}</span>
         <span>{mensaje}</span>
         <span>{mensaje}</span>
+        <span>{mensaje}</span>
+        <span>{mensaje}</span>
+        <span>{mensaje}</span>
       </div>
     </div>
   );

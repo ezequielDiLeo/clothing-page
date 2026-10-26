@@ -16,6 +16,7 @@ import { ProtectedRouteWithModal } from '../components/ProtectedRouteWithModal/P
 import { useState } from 'react'
 import { LoginScreen } from '../components/LoginScreen/LoginScreen'
 import { RegisterScreen } from '../components/registerScreen/register'
+import { ScrollToTopButton } from '../components/scrollBtn/scrollBtn'
 
 
 
@@ -25,13 +26,13 @@ export const AppRouter = () => {
 
 
   return (
-    <>
-         
-        <BrowserRouter>
-          <ScrollToTop />
-          <Ticker />
-          <Navbar />
+    <BrowserRouter>
+      <div className="app-shell">
+        <ScrollToTop />
+        <Ticker />
+        <Navbar />
 
+        <div className="app-content">
           <Routes>
               {/* Rutas públicas */}
               <Route path='/' element={<ItemListContainer />} />
@@ -55,6 +56,7 @@ export const AppRouter = () => {
               {/* Catch all */}
               <Route path='*' element={<Navigate to='/' />} />
           </Routes>
+        </div>
 
           {showLogin && (
             <LoginScreen
@@ -77,8 +79,9 @@ export const AppRouter = () => {
 
 
 
-          <Footer />
-        </BrowserRouter>
-    </>
+        <Footer />
+        <ScrollToTopButton />
+      </div>
+    </BrowserRouter>
   )
 }

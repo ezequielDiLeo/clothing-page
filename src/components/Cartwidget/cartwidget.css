@@ -1,0 +1,119 @@
+.cart-trigger {
+  position: relative;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #303a34;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+.cart-trigger:hover {
+  background: #f3f5f2;
+  color: #778b70;
+}
+.cart-trigger:focus-visible {
+  outline: 2px solid #778b70;
+  outline-offset: 3px;
+}
+.cart-trigger .cart-count {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  display: grid;
+  min-width: 18px;
+  height: 18px;
+  place-items: center;
+  padding: 0 4px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: #778b70;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.modal-layout {
+  position: fixed;
+  inset: 0;
+  z-index: 1600;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(18, 24, 20, 0.48);
+  animation: cart-backdrop-in 180ms ease both;
+}
+
+.menu-modal-cart {
+  display: flex;
+  flex-direction: column;
+  width: min(470px, 100%);
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: -12px 0 40px rgba(18, 24, 20, 0.14);
+  animation: cart-panel-in 220ms ease both;
+}
+.menu-modal-cart .close-component {
+  display: flex;
+  min-height: 68px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid #ecefeb;
+}
+.menu-modal-cart .mi-compra {
+  margin: 0;
+  color: #28332c;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.menu-modal-cart .close {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid #e8ece8;
+  border-radius: 50%;
+  background: #fff;
+  color: #303a34;
+  cursor: pointer;
+}
+.menu-modal-cart .close:hover {
+  background: #f4f6f3;
+}
+.menu-modal-cart .close:focus-visible {
+  outline: 2px solid #778b70;
+  outline-offset: 3px;
+}
+
+@keyframes cart-panel-in {
+  from {
+    transform: translateX(16px);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes cart-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal-layout,
+  .menu-modal-cart {
+    animation: none;
+  }
+}/*# sourceMappingURL=cartwidget.css.map */

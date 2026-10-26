@@ -1,119 +1,97 @@
-
 import { createContext, useEffect, useState } from 'react'
-import { signOut ,onAuthStateChanged ,createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import {
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signOut,
+} from 'firebase/auth'
 import { auth } from '../../firebase/config'
-import PropTypes from 'prop-types';
-import Swal from 'sweetalert2';
+import PropTypes from 'prop-types'
+import Swal from 'sweetalert2'
 
 export const UserContext = createContext()
 
-export const UserProvider = ({children}) => {
+export const UserProvider = ({ children }) => {
     const [user, setUser] = useState({
         email: null,
         logged: false,
-        uid: null
+        uid: null,
     })
-    UserProvider.propTypes = {
-        children: PropTypes.node.isRequired
-    };
+    const [authReady, setAuthReady] = useState(false)
 
     const login = async (values) => {
-        try {
-        await signInWithEmailAndPassword(auth, values.email, values.password);
-        } catch (error) {
-            if (error.code === 'auth/too-many-requests') {
-                alert('Demasiados intentos fallidos. Por favor, esperá unos minutos antes de volver a intentar.');
-            } else if (error.code === 'auth/wrong-password') {
-                Swal.fire({
-                    title: 'Contraseña incorrecta',
-                    text: 'Por favor, verifica tu contraseña e intente nuevamente.',
-                    icon: 'error',
-                    confirmButtonText: 'Aceptar',
-                })
-            } else {
-                Swal.fire({
-                    title: 'Usuario o Contraseña incorrectos',
-                    text: 'Por favor, verifique su usuario y contraseña e intente nuevamente.',
-                    icon: 'error',
-                    confirmButtonText: 'Aceptar',
-                    confirmButtonColor: 'black'
-                })
-            }
-        }
+        const result = await signInWithEmailAndPassword(auth, values.email, values.password)
+        return result.user
     }
 
     const register = async (values) => {
-    try {
-        await createUserWithEmailAndPassword(auth, values.email, values.password);
-    } catch (error) {
-        if (error.code === 'auth/email-already-in-use') {
-            Swal.fire({
-                title: 'El email ya esta en uso',
-                text: 'Por favor, verifique su email e intente nuevamente.',
-                icon: 'error',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: 'black'
+        const result = await createUserWithEmailAndPassword(auth, values.email, values.password)
+        return result.user
+    }
+
+    const logOut = async () => {
+        const result = await Swal.fire({
+            title: '¿Cerrar sesión?',
+            text: 'Podrás volver a ingresar cuando quieras.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#252922',
+            cancelButtonColor: '#8b8b80',
+            confirmButtonText: 'Cerrar sesión',
+            cancelButtonText: 'Cancelar',
+        })
+
+        if (!result.isConfirmed) return
+
+        try {
+            await signOut(auth)
+            await Swal.fire({
+                title: 'Sesión cerrada',
+                text: 'Esperamos verte pronto.',
+                icon: 'success',
+                timer: 1600,
+                showConfirmButton: false,
             })
-        } else {
-        console.error('Error al registrarse:', error);
-            Swal.fire({
-                title: 'Ocurrió un error',
-                text: 'Por favor, intente nuevamente más tarde.',
+        } catch (error) {
+            console.error('No se pudo cerrar la sesión:', error)
+            await Swal.fire({
+                title: 'No se pudo cerrar la sesión',
+                text: 'Intentalo de nuevo en unos instantes.',
                 icon: 'error',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: 'black'
+                confirmButtonColor: '#252922',
             })
         }
     }
-    };
-
-
-    const logOut = (() => {
-        Swal.fire({
-            title: '¿Quieres cerrar la sesión?',
-            text: "Estás a punto de cerrar sesión.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: 'black',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, cerrar sesión',
-            cancelButtonText: 'Cancelar',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                signOut(auth),
-                Swal.fire({
-                    title: 'Has cerrado sesión',
-                    text: 'Esperamos verte pronto.',
-                    timer: 2000,
-                    timerProgressBar: true,
-                    timerProgressBarColor: 'black',
-                    showConfirmButton: false
-                })
-            }
-        })
-    })
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser({
-                    email: user.email,
+        const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+            setUser(firebaseUser
+                ? {
+                    email: firebaseUser.email,
                     logged: true,
-                    uid: user.uid
-                })
-            } else {
-                setUser({
+                    uid: firebaseUser.uid,
+                }
+                : {
                     email: null,
                     logged: false,
-                    uid: null
+                    uid: null,
                 })
-            }
+            setAuthReady(true)
+        }, (error) => {
+            console.error('No se pudo comprobar la sesión:', error)
+            setAuthReady(true)
         })
+
+        return unsubscribe
     }, [])
 
-    return(
-        <UserContext.Provider value={{user, login, register, logOut}}>
+    return (
+        <UserContext.Provider value={{ user, authReady, login, register, logOut }}>
             {children}
         </UserContext.Provider>
     )
+}
+
+UserProvider.propTypes = {
+    children: PropTypes.node.isRequired,
 }

@@ -3,6 +3,7 @@ import './productosRelacionados.scss';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { formatPrice } from '../../utils/price';
 
 export const ProductosRelacionados = ({ categoriaActual, productoId }) => {
   const [relacionados, setRelacionados] = useState([]);
@@ -36,7 +37,7 @@ export const ProductosRelacionados = ({ categoriaActual, productoId }) => {
             className="bg-white shadow-md p-4 rounded hover:shadow-lg cursor-pointer transition"
           >
             <img src={prod.img} alt={prod.name} className="w-full h-40 object-cover rounded" />
-            <p className="text-black font-semibold">${prod.price}</p>
+            <p className="text-black font-semibold">{formatPrice(prod.price)}</p>
             <h4 className="text-black mt-2">{prod.name}</h4>
           </div>
         ))}

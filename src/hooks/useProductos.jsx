@@ -1,39 +1,47 @@
-import { useEffect, useState } from 'react' 
+import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { collection, getDocs } from 'firebase/firestore' 
+import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../firebase/config'
 
-
-//con array de objetos propios
-
 export const useProductos = () => {
-    const [productos, setProductos] = useState ([])
-    const [loading, setLoading] = useState (true)
-    const {categoryName} = useParams()
+    const [productos, setProductos] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
+    const [reloadCount, setReloadCount] = useState(0)
+    const { categoryName } = useParams()
 
-    useEffect(() =>{
-        setLoading (true)
+    useEffect(() => {
+        let isCurrentRequest = true
+        setLoading(true)
+        setError(null)
 
-        //armar ref (sync)
-        const productosRef = collection(db, 'productos')
-        //llamar ref (async)
-        getDocs( productosRef )
+        getDocs(collection(db, 'productos'))
             .then((querySnapshot) => {
-                const docs = querySnapshot.docs.map(doc => {
-                    return {
-                        ...doc.data(),
-                        id: doc.id
-                    }
-                })
-
-                setProductos( docs )
+                if (!isCurrentRequest) return
+                const docs = querySnapshot.docs.map((productDocument) => ({
+                    ...productDocument.data(),
+                    id: productDocument.id,
+                }))
+                setProductos(docs)
             })
-            .finally(() => setLoading(false))
+            .catch((requestError) => {
+                console.error('No se pudo cargar la colección de productos:', requestError)
+                if (!isCurrentRequest) return
+                setProductos([])
+                setError(requestError)
+            })
+            .finally(() => {
+                if (isCurrentRequest) setLoading(false)
+            })
 
-    }, [categoryName])
+        return () => {
+            isCurrentRequest = false
+        }
+    }, [categoryName, reloadCount])
 
-    return {
-        productos,
-        loading
-    }
+    const retry = useCallback(() => {
+        setReloadCount((currentCount) => currentCount + 1)
+    }, [])
+
+    return { productos, loading, error, retry }
 }
