@@ -4,6 +4,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../firebase/config'
 import { ItemProduct } from '../ItemProduct/ItemProduct'
 import '../ItemProduct/ItemProduct.scss'
+import { usePromotion } from '../../hooks/usePromotion'
 
 export const ItemProductContainer = () => {
     const [loading, setLoading] = useState(true)
@@ -11,6 +12,7 @@ export const ItemProductContainer = () => {
     const [error, setError] = useState(null)
     const [reloadCount, setReloadCount] = useState(0)
     const { categoryId } = useParams()
+    const promotion = usePromotion()
 
     useEffect(() => {
         let isCurrentRequest = true
@@ -64,5 +66,5 @@ export const ItemProductContainer = () => {
         )
     }
 
-    return <ItemProduct product={product} />
+    return <ItemProduct product={product} promotion={promotion} />
 }

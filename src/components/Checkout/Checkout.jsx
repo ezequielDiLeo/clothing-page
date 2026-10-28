@@ -6,6 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { collection, doc, runTransaction } from 'firebase/firestore'
 import { db } from '../../firebase/config'
+import { auth } from '../../firebase/config'
+import { getDiscountedPrice as calculateDiscountedPrice } from '../../utils/promotions'
 import { formatPrice, parsePrice } from '../../utils/price'
 import { CartContext } from '../Cartwidget/CartContext'
 import './Checkout.scss'
@@ -34,18 +36,18 @@ export const Checkout = () => {
         setSubmitting(true)
         setSubmitError('')
         const orderRef = doc(collection(db, 'orders'))
-        const orderItems = cart.map((item) => ({ ...item }))
-        const orderTotal = totalCart()
 
         try {
             await runTransaction(db, async (transaction) => {
-                const productSnapshots = await Promise.all(
-                    orderItems.map((item) => transaction.get(doc(db, 'productos', item.id))),
-                )
+                const productSnapshots = await Promise.all(cart.map((item) => (
+                    transaction.get(doc(db, 'productos', item.id))
+                )))
+                const promotionSnapshot = await transaction.get(doc(db, 'promotions', 'global'))
+                const promotion = promotionSnapshot.exists() ? promotionSnapshot.data() : null
                 const unavailableProducts = []
 
                 productSnapshots.forEach((snapshot, index) => {
-                    const orderItem = orderItems[index]
+                    const orderItem = cart[index]
                     const availableStock = Number(snapshot.data()?.stock)
                     if (!snapshot.exists() || !Number.isFinite(availableStock) || availableStock < orderItem.cantidad) {
                         unavailableProducts.push(orderItem.name)
@@ -56,9 +58,27 @@ export const Checkout = () => {
                     throw new Error(`No hay stock suficiente para: ${unavailableProducts.join(', ')}.`)
                 }
 
+                const orderItems = productSnapshots.map((snapshot, index) => {
+                    const currentProduct = { ...snapshot.data(), id: snapshot.id }
+                    return {
+                        ...currentProduct,
+                        originalPrice: currentProduct.price,
+                        price: calculateDiscountedPrice(currentProduct, promotion),
+                        cantidad: cart[index].cantidad,
+                    }
+                })
+                const stockChanges = Object.fromEntries(
+                    orderItems.map((item) => [item.id, item.cantidad]),
+                )
+                const orderTotal = orderItems.reduce(
+                    (total, item) => total + item.price * item.cantidad,
+                    0,
+                )
+
                 productSnapshots.forEach((snapshot, index) => {
                     transaction.update(snapshot.ref, {
                         stock: Number(snapshot.data().stock) - orderItems[index].cantidad,
+                        lastOrderId: orderRef.id,
                     })
                 })
 
@@ -67,6 +87,8 @@ export const Checkout = () => {
                     items: orderItems,
                     total: orderTotal,
                     fecha: new Date(),
+                    userId: auth.currentUser.uid,
+                    stockChanges,
                 })
             })
 

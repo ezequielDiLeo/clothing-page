@@ -7,14 +7,16 @@ import { CartContext } from '../Cartwidget/CartContext'
 import ProductDetails from '../medidas/medidas'
 import { formatPrice } from '../../utils/price'
 import './ItemDetail.scss'
+import { getDiscountedPrice, getProductDiscount } from '../../utils/promotions'
 
 export const ItemDetail = ({ item }) => {
     const navigate = useNavigate()
-    const { addToCart, cart } = useContext(CartContext)
+    const { addToCart, cart, promotion } = useContext(CartContext)
     const [selectedImg, setSelectedImg] = useState(item.img)
     const [quantity, setQuantity] = useState(1)
     const [cartMessage, setCartMessage] = useState('')
     const itemInCart = cart.find((cartItem) => cartItem.id === item.id)
+    const discountPercent = getProductDiscount(item, promotion)
     const stock = Number(item.stock)
     const remainingStock = Number.isFinite(stock) ? Math.max(0, stock - (itemInCart?.cantidad || 0)) : Infinity
     const images = [item.img, item.img2, item.img3, item.img4].filter(Boolean)
@@ -72,8 +74,9 @@ export const ItemDetail = ({ item }) => {
                         </div>
                         <p className="product-detail-eyebrow">DISEÑO PARA TODOS LOS DÍAS</p>
                         <h1>{item.name}</h1>
-                        <p className="product-detail-price">{formatPrice(item.price)}</p>
-                        <p className="product-transfer-note">10% de descuento pagando con transferencia o depósito</p>
+                        <p className="product-detail-price">{formatPrice(getDiscountedPrice(item, promotion))}</p>
+                        {discountPercent > 0 && <p className="product-transfer-note">{discountPercent}% de descuento aplicado</p>}
+                        <p className="product-transfer-note">El descuento por transferencia se confirma al coordinar el pago.</p>
 
                         {item.description && <p className="product-description">{item.description}</p>}
                         {item.caract && <p className="product-characteristics">{item.caract}</p>}

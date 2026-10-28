@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import './ItemProduct.scss';
 import PropTypes from 'prop-types';
 import { formatPrice, parsePrice } from '../../utils/price'
+import { getDiscountedPrice } from '../../utils/promotions'
 
-export const ItemProduct = ({ product }) => {
+export const ItemProduct = ({ product, promotion }) => {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
 
@@ -60,7 +61,7 @@ export const ItemProduct = ({ product }) => {
                 <img src={prod.img} alt={prod.name} className='imagen' loading="lazy" />
               </Link>
               <div className='cont-text'>
-                <p className='precio-descr'>{formatPrice(prod.price)}</p>
+                <p className='precio-descr'>{formatPrice(getDiscountedPrice(prod, promotion))}</p>
                 <h3 className='prod-name-descr'>{prod.name}</h3>
                 <h3 className='prod-category-descr'>{prod.category}</h3>
                 <div className='cont-btn-mas'>
@@ -86,4 +87,5 @@ ItemProduct.propTypes = {
       category: PropTypes.string.isRequired,
     })
   ).isRequired,
+  promotion: PropTypes.object,
 };

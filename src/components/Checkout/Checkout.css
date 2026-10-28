@@ -277,7 +277,6 @@
   max-height: 360px;
   flex-direction: column;
   gap: 19px;
-  overflow-y: auto;
   margin: 23px 0 0;
   padding: 0 2px 18px 0;
   border-bottom: 1px solid #eeede8;

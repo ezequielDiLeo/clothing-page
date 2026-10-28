@@ -1,11 +1,15 @@
 import { createContext, useEffect, useState } from 'react'
 import {
     createUserWithEmailAndPassword,
+    sendEmailVerification,
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signOut,
 } from 'firebase/auth'
 import { auth } from '../../firebase/config'
+import { db } from '../../firebase/config'
+import { ADMIN_EMAIL } from '../../config/admin'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
 import PropTypes from 'prop-types'
 import Swal from 'sweetalert2'
 
@@ -18,6 +22,7 @@ export const UserProvider = ({ children }) => {
         uid: null,
     })
     const [authReady, setAuthReady] = useState(false)
+    const isAdmin = user.email?.toLowerCase() === ADMIN_EMAIL && user.emailVerified
 
     const login = async (values) => {
         const result = await signInWithEmailAndPassword(auth, values.email, values.password)
@@ -26,7 +31,21 @@ export const UserProvider = ({ children }) => {
 
     const register = async (values) => {
         const result = await createUserWithEmailAndPassword(auth, values.email, values.password)
+        await setDoc(doc(db, 'users', result.user.uid), {
+            email: result.user.email,
+            createdAt: serverTimestamp(),
+        })
+        if (result.user.email?.toLowerCase() === ADMIN_EMAIL) {
+            await sendEmailVerification(result.user)
+        }
         return result.user
+    }
+
+    const sendAdminVerification = async () => {
+        if (auth.currentUser?.email?.toLowerCase() !== ADMIN_EMAIL) {
+            throw new Error('La cuenta actual no corresponde al administrador configurado.')
+        }
+        await sendEmailVerification(auth.currentUser)
     }
 
     const logOut = async () => {
@@ -68,11 +87,13 @@ export const UserProvider = ({ children }) => {
             setUser(firebaseUser
                 ? {
                     email: firebaseUser.email,
+                    emailVerified: firebaseUser.emailVerified,
                     logged: true,
                     uid: firebaseUser.uid,
                 }
                 : {
                     email: null,
+                    emailVerified: false,
                     logged: false,
                     uid: null,
                 })
@@ -86,7 +107,7 @@ export const UserProvider = ({ children }) => {
     }, [])
 
     return (
-        <UserContext.Provider value={{ user, authReady, login, register, logOut }}>
+        <UserContext.Provider value={{ user, authReady, isAdmin, login, register, logOut, sendAdminVerification }}>
             {children}
         </UserContext.Provider>
     )

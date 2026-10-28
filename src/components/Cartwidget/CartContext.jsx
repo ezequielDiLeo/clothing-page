@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types'
 import { createContext, useEffect, useState } from 'react'
-import { parsePrice } from '../../utils/price'
+import { usePromotion } from '../../hooks/usePromotion'
+import { getDiscountedPrice } from '../../utils/promotions'
+import { doc, onSnapshot } from 'firebase/firestore'
+import { db } from '../../firebase/config'
 
 export const CartContext = createContext()
 
@@ -31,10 +34,31 @@ const getStockLimit = (item) => {
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(readStoredCart)
+    const promotion = usePromotion()
+    const cartProductIds = JSON.stringify([...new Set(cart.map((item) => item.id))])
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart))
     }, [cart])
+
+    useEffect(() => {
+        const productIds = JSON.parse(cartProductIds)
+        const unsubscribeProducts = productIds.map((productId) => onSnapshot(
+            doc(db, 'productos', productId),
+            (snapshot) => {
+                if (!snapshot.exists()) return
+                setCart((currentCart) => currentCart.map((item) => (
+                    item.id === productId
+                        ? { ...snapshot.data(), id: snapshot.id, cantidad: item.cantidad }
+                        : item
+                )))
+            },
+            (error) => {
+                console.error(`No se pudo sincronizar el producto ${productId} del carrito:`, error)
+            },
+        ))
+        return () => unsubscribeProducts.forEach((unsubscribe) => unsubscribe())
+    }, [cartProductIds])
 
     const addToCart = (itemToCart) => {
         setCart((prevCart) => {
@@ -92,7 +116,7 @@ export const CartProvider = ({ children }) => {
     }
 
     const totalCart = () => {
-        return cart.reduce((total, item) => total + item.cantidad * parsePrice(item.price), 0)
+        return cart.reduce((total, item) => total + item.cantidad * getDiscountedPrice(item, promotion), 0)
     }
 
     return (
@@ -106,6 +130,8 @@ export const CartProvider = ({ children }) => {
             increaseQty,
             decreaseQty,
             removeItem,
+            promotion,
+            getDiscountedPrice: (item) => getDiscountedPrice(item, promotion),
         }}>
             {children}
         </CartContext.Provider>

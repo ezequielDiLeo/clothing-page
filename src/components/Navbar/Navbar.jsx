@@ -241,6 +241,7 @@ export const Navbar = () => {
                 ))}
               </nav>
             </div>
+            <Link className="drawer-home" to="/admin" onClick={closeMenus}>Administración</Link>
 
             <div className="drawer-section">
               <p className="drawer-section-title">

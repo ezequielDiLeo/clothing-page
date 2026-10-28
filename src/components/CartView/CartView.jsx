@@ -3,11 +3,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
 import PropTypes from 'prop-types'
 import { CartContext } from '../Cartwidget/CartContext'
-import { formatPrice, parsePrice } from '../../utils/price'
+import { formatPrice } from '../../utils/price'
 import './CartView.scss'
 
 export const CartView = ({ onClose }) => {
-    const { cart, totalCart, clearCart, increaseQty, decreaseQty, removeItem, itemInCart } = useContext(CartContext)
+    const { cart, totalCart, clearCart, increaseQty, decreaseQty, removeItem, itemInCart, getDiscountedPrice } = useContext(CartContext)
     const navigate = useNavigate()
 
     const goToCheckout = () => {
@@ -62,7 +62,7 @@ export const CartView = ({ onClose }) => {
                                     <Trash2 size={17} />
                                 </button>
                             </div>
-                            <p className="cart-item-price">{formatPrice(item.price)}</p>
+                            <p className="cart-item-price">{formatPrice(getDiscountedPrice(item))}</p>
                             <div className="cart-item-bottom">
                                 <div className="quantity-control" aria-label={`Cantidad de ${item.name}`}>
                                     <button
@@ -82,7 +82,7 @@ export const CartView = ({ onClose }) => {
                                         <Plus size={14} />
                                     </button>
                                 </div>
-                                <strong>{formatPrice(parsePrice(item.price) * item.cantidad)}</strong>
+                                <strong>{formatPrice(getDiscountedPrice(item) * item.cantidad)}</strong>
                             </div>
                         </div>
                     </li>
@@ -94,7 +94,7 @@ export const CartView = ({ onClose }) => {
                     <span>Subtotal</span>
                     <strong>{formatPrice(totalCart())}</strong>
                 </div>
-                <p>El envío y cualquier promoción se calculan al finalizar la compra.</p>
+                <p>El envío se calcula al finalizar la compra. Los descuentos se aplican automáticamente.</p>
                 <button className="cart-primary-action" type="button" onClick={goToCheckout}>
                     Continuar al pago <span aria-hidden="true">→</span>
                 </button>

@@ -14,6 +14,13 @@ export const Footer = () => {
     });
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   const currentYear = new Date().getFullYear();
 
   return (
@@ -115,10 +122,10 @@ export const Footer = () => {
           © {currentYear} Clothing C&E. Todos los derechos reservados.
         </p>
 
-        <Link to="/" className="footer__back-top">
+        <span onClick={scrollToTop} className="footer__back-top">
           Volver al inicio
           <i className="fa-solid fa-arrow-up" aria-hidden="true"></i>
-        </Link>
+        </span>
       </div>
     </footer>
   );

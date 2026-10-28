@@ -17,9 +17,10 @@ import 'swiper/css'
 import 'swiper/css/autoplay'
 import 'swiper/css/effect-fade'
 import { formatPrice } from '../../utils/price'
+import { getDiscountedPrice } from '../../utils/promotions'
 
 
-export const ItemList = ({ productos, loading, error, onRetry }) => {
+export const ItemList = ({ productos, loading, error, onRetry, promotion }) => {
   const sliderRef = useRef();
   const [, setWidth] = useState(0);
   const x = useMotionValue(0);
@@ -162,7 +163,7 @@ export const ItemList = ({ productos, loading, error, onRetry }) => {
                       <div className="item-info">
                         <p className='categoria'>{item.category}</p>
                         <h3 className='title-card'>{item.name}</h3>
-                        <p className='price'>{formatPrice(item.price)}</p>
+                        <p className='price'>{formatPrice(getDiscountedPrice(item, promotion))}</p>
                       </div>
                     </article>
                     </Link>
@@ -193,7 +194,7 @@ export const ItemList = ({ productos, loading, error, onRetry }) => {
                 <div className='item-in'>
                   <img src={item.img} alt={item.name} loading="lazy" />
                 </div>
-                <p className='font-semibold price-in pt-2'>{formatPrice(item.price)}</p>
+                <p className='font-semibold price-in pt-2'>{formatPrice(getDiscountedPrice(item, promotion))}</p>
                 <h3 className='text-xl pt-2 name-in'>{item.name}</h3>
                 <p className='categoria'>{item.category}</p>
                 <Link to={`/item/${item.id}`} className='a btn-mas'>
@@ -228,4 +229,5 @@ ItemList.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.object,
   onRetry: PropTypes.func,
+  promotion: PropTypes.object,
 };

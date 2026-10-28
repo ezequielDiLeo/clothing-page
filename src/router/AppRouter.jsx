@@ -17,6 +17,7 @@ import { useState } from 'react'
 import { LoginScreen } from '../components/LoginScreen/LoginScreen'
 import { RegisterScreen } from '../components/registerScreen/register'
 import { ScrollToTopButton } from '../components/scrollBtn/scrollBtn'
+import { AdminDashboard } from '../components/AdminDashboard/AdminDashboard'
 
 
 
@@ -44,6 +45,7 @@ export const AppRouter = () => {
               <Route path="/faq" element={<Faq />} />
               <Route path='/devoluciones' element={<Devoluciones />} />
               <Route path='/envios' element={<Envios />} />
+              <Route path='/admin' element={<AdminDashboard />} />
 
               {/* Rutas protegidas */}
               <Route path='/checkout' element={
